@@ -1,6 +1,6 @@
 <?php ob_start() ?>
 
-<h1>REGISTR</h1>
+<h1>REGISTRATION</h1>
 
 <form method="POST">
     

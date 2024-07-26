@@ -1,12 +1,10 @@
 <?php 
 
+    namespace Viewer;
+
     class ViewHandler {
 
-        public function __construct($adminController = new AdminController(), $userController = new UserController()) {
-            
-        }
-
-        public static function render($view){
+        public static function render($view, ?object $disciplines = null, ?object $students = null, ?object $grades = null, ?object $schedules = null){
             require "views/$view/$view.php";
             require "views/template.php";
         }

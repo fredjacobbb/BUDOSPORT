@@ -2,13 +2,15 @@
 
     require 'models/BaseModel.php';
     require 'models/ConnectDb.php';
-    require 'models/UserModel.php';
     require 'viewer/ViewHandler.php';
+    require 'models/UserModel.php';
+    require 'models/DisciplinesModel.php';
 
     require 'controllers/admin/AdminController.php';
     require 'controllers/UserController.php';
+    require 'controllers/SchedulesController.php';
 
-    $adminController = new AdminController();
+    // $adminController = new AdminController();
     $userController = new UserController();
 
     if (isset($_GET['q'])) {
@@ -31,10 +33,11 @@
                 break;
             
             default:
-                $userController;
+                
                 break;
         }
     }else{
         echo "home";
+        die;
     }
 
