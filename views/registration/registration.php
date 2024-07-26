@@ -27,6 +27,13 @@
         <? endforeach ?>
     </select>
 
+    <label class="form-label" for="grade">Grades</label>
+    <select name="grade" class="form-select" id="grade">
+        <? foreach($grades as $grade): ?>
+            <option value="<?= $grade->grade_id ?>"><?= ucfirst($grade->grade_name) ?></option>
+        <? endforeach ?>
+    </select>
+
     <div class="text-center m-4">
         <button class="btn btn-danger" type="submit">S'inscrire</button>
     </div>
