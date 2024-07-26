@@ -3,20 +3,20 @@
     require 'models/BaseModel.php';
     require 'models/ConnectDb.php';
     require 'viewer/ViewHandler.php';
-    require 'models/UserModel.php';
+    require 'models/UsersModel.php';
     require 'models/DisciplinesModel.php';
 
     require 'controllers/admin/AdminController.php';
-    require 'controllers/UserController.php';
+    require 'controllers/UserActionsController.php';
     require 'controllers/SchedulesController.php';
 
     // $adminController = new AdminController();
-    $userController = new UserController();
+    $userActionsController = new UserActionsController(new DisciplinesModel(), new UsersModel());
 
     if (isset($_GET['q'])) {
         switch ($_GET['q']) {
             case 'registration':
-                $userController->registration();
+                $userActionsController->registration();
                 break;
             case 'admin':
                 if (isset($_GET['action'])) {

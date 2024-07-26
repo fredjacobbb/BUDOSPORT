@@ -1,15 +1,12 @@
 <?php
 
-    namespace App\Models;
     
-    use BaseModel;
-
-    class UserModel extends BaseModel {
+    class UsersModel extends BaseModel {
 
         public function __construct() {
             parent::__construct();
         }
-        
+
         public function getAllStudents(){
             $sql = "SELECT `student_firstname`,`student_name` FROM `students`";
             $stmt = $this->db->query($sql);
@@ -59,7 +56,7 @@
             $sql = "SELECT * FROM `ages_ranges`";
             $res = $this->db->query($sql);
             $res->execute();
-            return $res->fetchAll();
+            return $res->fetchAll(PDO::FETCH_OBJ);
         }
 
         public function getAge($birthdate){
