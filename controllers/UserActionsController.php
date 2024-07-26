@@ -14,10 +14,7 @@
         public function checkInputsRegistration(){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (!empty($_POST['name'] && !empty($_POST['firstname']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['birthdate'] && !empty($_POST['discipline']) && !empty($_POST['grade'])))) {
-                    Validator::registration($_POST['name']);
-                    // foreach ($_POST as $key => $value) {
-                        
-                    // }
+                    Validator::registration($_POST);
                 }
             }
         }

@@ -14,7 +14,7 @@
     require 'controllers/SchedulesController.php';
 
     // $adminController = new AdminController();
-    $userActionsController = new UserActionsController(new DisciplinesModel(), new UsersModel(), new GradesModel());
+    $userActionsController = new UserActionsController(new DisciplinesModel(), new UsersModel(), new GradesModel(), new Validator());
 
     if (isset($_GET['q'])) {
         switch ($_GET['q']) {
