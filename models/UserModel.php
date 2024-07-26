@@ -9,17 +9,7 @@
         public function __construct() {
             parent::__construct();
         }
-
-        public function checkUserExist($name,$firstname,$email){
-            $sql = "SELECT * FROM `students` WHERE `student_name` = ? AND `student_firstname` = ? AND `student_email` = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindValue(1,$name);
-            $stmt->bindValue(2,$firstname);
-            $stmt->bindValue(3,$email);
-            $stmt->execute();
-            return $stmt->fetch();
-        }
-
+        
         public function getAllStudents(){
             $sql = "SELECT `student_firstname`,`student_name` FROM `students`";
             $stmt = $this->db->query($sql);
