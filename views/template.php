@@ -6,7 +6,7 @@
     <title>BUDOSPORT</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
-<body>
+<body class="bg-dark">
     <?= $view ?>
 </body>
 </html>

@@ -21,6 +21,9 @@
             case 'registration':
                 $userActionsController->registration();
                 break;
+            case 'login':
+                $userActionsController->login();
+                break;
             case 'admin':
                 if (isset($_GET['action'])) {
                     switch ($_GET['action']) {
