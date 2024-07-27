@@ -1,15 +1,32 @@
 <?php ob_start() ?>
 
-<?php use Leaf\Flash ?>
+<?php use Leaf\Flash; ?>
 
-<?= Flash::display("connect_failed"); ?>
+<ul>
+    <li><a class="fs-5" href="/">Accueil</a></li>
+    <li><a class="fs-5" href="/?q=schedules">Les horaires</a></li>
+    <li><a class="fs-5" href="./?q=disciplines">Les disciplines</a></li>
+    <li><a class="fs-5" href="./?q=login">Se connecter</a></li>
+    <li><a class="fs-5 active" href="./?q=registration">S'inscrire</a></li>
+    <li><a class="fs-5" href="./?q=contact-us"></a></li>
+</ul>
 
-<form method="POST" class="bg-light m-4 mx-auto border border-2 rounded-2 pt-5 px-3" style="max-width:450px">
+<?php $nav = ob_get_clean() ?>
+
+<?php ob_start() ?>
+
+<?php if(isset($_SESSION['leaf']['flash'])): ?>
+    <div class="alert alert-danger text-center text-light bg-red flash flash-error" role="alert">
+        <p><?= Flash::display("connect_failed"); ?></p>
+    </div>
+<?php endif; ?>
+
+<form method="POST" class="bg-light m-4 mt-5 mx-auto border border-2 rounded-2 pt-3 px-3" style="max-width:450px">
 
     <p class="fs-1 fw-semibold">Inscription</p>
 
     <div class="d-flex justify-content-around align-items-center my-4">
-        <p class="fw-lighter m-0">Vous possédez un compte ? </p>
+        <p class="fw-lighter fs-6 m-0">Vous possédez un compte ? </p>
         <a href="./?q=login" class="text-danger fs-3 p-0 text-decoration-none fw-medium">Se connecter</a>
     </div>
 
