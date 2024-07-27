@@ -1,13 +1,17 @@
 <?php 
 
+    require_once __DIR__ . '/vendor/autoload.php';
+
+    require 'helpers/TokenGenerator.php';
     require 'helpers/Validator.php';
+
     require 'models/BaseModel.php';
     require 'models/ConnectDb.php';
-    require 'viewer/ViewHandler.php';
     require 'models/UsersModel.php';
     require 'models/DisciplinesModel.php';
     require 'models/GradesModel.php';
-
+    
+    require 'viewer/ViewHandler.php';
 
     require 'controllers/admin/AdminController.php';
     require 'controllers/UserActionsController.php';

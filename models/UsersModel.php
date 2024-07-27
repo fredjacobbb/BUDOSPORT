@@ -13,22 +13,26 @@
             return $stmt->fetchAll();
         }
 
-        public function insertUser($name,$firstname,$birthdate,$subscriptionDate,$email,$password,$date,$discipline,$gradeId){
+        public function insertUser($name,$firstname,$birthdate,$subscriptionDate,$email,$password,$lastGradeObtention,$disciplineId,$gradeId,$token){
             $age = $this->getAge($birthdate);
             $rangeAgeId = $this->getAgeRangeId($age);
-            $sql = "INSERT INTO students(student_name,student_firstname,student_birthdate,subscription_date,student_email,student_password,last_grade_obtention,discipline_id,age_id,grade_id)
-                    SELECT ?,?,?,?,?,?,?,?,?,? WHERE NOT EXISTS (SELECT * FROM students WHERE student_name = ? AND student_firstname = ? AND student_email = ?)";
+            $sql = "INSERT INTO students(student_name,student_firstname,student_birthdate,subscription_date,student_email,student_password,last_grade_obtention,discipline_id,age_id,grade_id,student_token)
+                    SELECT ?,?,?,?,?,?,?,?,?,?,? WHERE NOT EXISTS (SELECT * FROM students WHERE student_name = ? AND student_firstname = ? AND student_email = ?)";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1,$name);
             $stmt->bindValue(2,$firstname);
             $stmt->bindValue(3,$birthdate);
             $stmt->bindValue(4,$subscriptionDate);
             $stmt->bindValue(5,$email);
-            $stmt->bindValue(6,$password);
-            $stmt->bindValue(7,$date);
-            $stmt->bindValue(8,$discipline);
+            $stmt->bindValue(6,password_hash($password, PASSWORD_BCRYPT));
+            $stmt->bindValue(7,$lastGradeObtention);
+            $stmt->bindValue(8,$disciplineId);
             $stmt->bindValue(9,$rangeAgeId);
             $stmt->bindValue(10,$gradeId);
+            $stmt->bindValue(11,$token);
+            $stmt->bindValue(12,$name);
+            $stmt->bindValue(13,$firstname);
+            $stmt->bindValue(14,$email);
             $stmt->execute();
         } 
 
@@ -56,7 +60,7 @@
             $sql = "SELECT * FROM `ages_ranges`";
             $res = $this->db->query($sql);
             $res->execute();
-            return $res->fetchAll(PDO::FETCH_OBJ);
+            return $res->fetchAll();
         }
 
         public function getAge($birthdate){

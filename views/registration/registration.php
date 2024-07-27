@@ -1,12 +1,16 @@
 <?php ob_start() ?>
 
+<?php use Leaf\Flash ?>
+
+<?= Flash::display("connect_failed"); ?>
+
 <form method="POST" class="bg-light m-4 mx-auto border border-2 rounded-2 pt-5 px-3" style="max-width:450px">
 
     <p class="fs-1 fw-semibold">Inscription</p>
 
     <div class="d-flex justify-content-around align-items-center my-4">
         <p class="fw-lighter m-0">Vous possédez un compte ? </p>
-        <a href="" class="text-danger fs-3 p-0 text-decoration-none fw-medium">Se connecter</a>
+        <a href="./?q=login" class="text-danger fs-3 p-0 text-decoration-none fw-medium">Se connecter</a>
     </div>
 
     <label class="form-label mt-1" for="name">Nom</label>
