@@ -1,11 +1,14 @@
 <?php 
 
     use Leaf\Flash;
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
 
     class UserActionsController extends BaseModel {
 
         public function __construct(protected $disciplinesModel, protected $usersModel, protected $gradesModel){
             parent::__construct();
+            $this->phpMailer = new PHPMailer();
         }
 
         public function registration(){
@@ -56,8 +59,58 @@
             }
         }
 
-        public function passwordForgotten(){
-            
+        public function sendEmailPasswordChanging($student_email, $student_id, $student_token){
+            try {                
+                $this->phpMailer->isSMTP();
+                $this->phpMailer->Host = 'smtp.gmail.com';
+                $this->phpMailer->Port = 465;
+                $this->phpMailer->SMTPAuth = true;
+                $this->phpMailer->SMTPSecure = 'ssl';
+                $this->phpMailer->Username = 'frdjacobbb@gmail.com';
+                $this->phpMailer->Password = 'jvnw eepr qrzm bszn';
+                $this->phpMailer->setFrom('frdjacobbb@gmail.com', 'BUDOSPORT-80-');
+                $this->phpMailer->addAddress('merguez.on.my.back@gmail.com', 'Destinataire');
+                $this->phpMailer->Subject = 'Mise à jour de votre mot de passe';
+                $this->phpMailer->Body = '<a href="./?q=update-password&student_id=$student_id&token=$student_token">Changer votre mot de passe en cliquant sur ce lien</a>';
+                if (!$this->phpMailer->send()) {
+                    Flash::set("L'envoi de l'email à échoué, veuillez réessayer. Si le problème persiste, contactez nous.", "error_mail_send");
+                    return false;
+                }else{
+                    Flash::set('Vous allez recevoir un mail d\'ici quelques minutes.', 'success_mail_send');
+                    return true;
+                }
+            } catch (\Throwable $th) {
+                var_dump($th);die;
+            }
         }
+
+        public function sendEmailActivationAccount(){
+
+        }
+
+        public function passwordForgotten(){
+            if ($_SERVER['REQUEST_METHOD'] === "POST") {
+                if (!empty($_POST['name']) && !empty($_POST['firstname']) && !empty($_POST['email'])) {
+                    Validator::reset_password($_POST);
+                    if(!Validator::$errors){
+                        if($user_info = $this->usersModel->getStudentByEmailFirstnameLastname(email:$_POST['email'],lastname:$_POST['name'],firstname:$_POST['firstname'])){
+                            $this->sendEmailPasswordChanging($user_info['student_email'], $user_info['student_id'], $user_info['student_token']) ? ViewHandler::render('login') : ViewHandler::render('forgot-password');
+                        }else {
+                            Flash::set('Nous rencontrons un problème avec vos identifiants, une ou plusieurs erreur.', 'change_password_error');
+                            ViewHandler::render('forgot-password');
+                        }
+                    }else{
+                        ViewHandler::render('forgot-password');
+                    }
+                }else{
+                    Flash::set('Nous rencontrons un problème avec vos identifiants, une ou plusieurs erreur.', 'change_password_error');
+                    ViewHandler::render('forgot-password');
+                }
+            }else{
+                ViewHandler::render('forgot-password');
+            }
+        }
+
+        //Flash::set("Les informations saisies semblent incorrects.", "change_password_error")
 
     }

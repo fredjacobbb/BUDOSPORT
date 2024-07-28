@@ -7,6 +7,10 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  text-decoration: none;
+}
+
 header .header-logo {
   max-width: 350px;
   margin: 2em;

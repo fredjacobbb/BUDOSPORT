@@ -14,7 +14,7 @@
         }
 
         public function getStudentByEmailFirstnameLastname($email,$firstname,$lastname){
-            $sql = "SELECT * FROM students WHERE student_email = ? AND student_firstname = ? AND student_name = ?";
+            $sql = "SELECT student_email, student_token, student_id FROM students WHERE student_email = ? AND student_firstname = ? AND student_name = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $email);
             $stmt->bindValue(2, $firstname);
