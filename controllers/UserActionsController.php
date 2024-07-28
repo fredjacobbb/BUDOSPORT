@@ -9,8 +9,7 @@
         }
 
         public function registration(){
-            $this->checkInputsRegistration();
-            ViewHandler::render('registration',disciplines:$this->disciplinesModel->getAll(), ages:$this->usersModel->getAllAgesRanges(), grades:$this->gradesModel->getAll());
+            return $this->checkInputsRegistration() ? ViewHandler::render('home') : ViewHandler::render('registration',disciplines:$this->disciplinesModel->getAll(), ages:$this->usersModel->getAllAgesRanges(), grades:$this->gradesModel->getAll());
         }
 
         public function checkInputsRegistration(){
@@ -29,9 +28,11 @@
                         $token = TokenGenerator::getRandomStringRandomInt();
                         if(checkdate($bd_fragment[2],$bd_fragment[1],$bd_fragment[0]) && $name && $firstname && $email && $password && $birthdate && $discipline && $grade){
                             if(!$this->usersModel->insertUser($name,$firstname,$birthdate,date('Y-m-d H:m'),$email,$password,date("Y-m-d H:m"),$discipline,$grade,$token)){
-                                // flash 
-                                Flash::set("Désolé, il semblerait que vous soyez déja inscrit, vérifiez vos mails.", "connect_failed");
-
+                                Flash::set("Désolé, il semblerait que vous soyez déja inscrit, vérifiez vos mails.", "registration_failed");
+                                return false;
+                            }else{
+                                Flash::set("Un email de validation vous a été envoyé, cliquez sur le lien pour activer le compte.", "registration_success");
+                                return true;
                             }
                         }
                     }
@@ -53,6 +54,10 @@
                     }
                 }
             }
+        }
+
+        public function passwordForgotten(){
+            
         }
 
     }

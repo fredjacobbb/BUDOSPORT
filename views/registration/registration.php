@@ -3,31 +3,33 @@
 <?php use Leaf\Flash; ?>
 
 <ul>
-    <li><a class="fs-5" href="/">Accueil</a></li>
-    <li><a class="fs-5" href="/?q=schedules">Les horaires</a></li>
-    <li><a class="fs-5" href="./?q=disciplines">Les disciplines</a></li>
-    <li><a class="fs-5" href="./?q=login">Se connecter</a></li>
-    <li><a class="fs-5 active" href="./?q=registration">S'inscrire</a></li>
-    <li><a class="fs-5" href="./?q=contact-us"></a></li>
+    <li class="fs-6"><a href="/"><i class="fas fa-home me-3"></i>Accueil</a></li>
+    <li class="fs-6"><a href="/?q=schedules"><i class="fas fa-clock me-3"></i>Les horaires</a></li>
+    <li class="fs-6"><a href="./?q=disciplines"><i class="fas fa-user-ninja me-3"></i>Les disciplines</a></li>
+    <li class="fs-6"><a href="./?q=login"><i class="fas fa-sign-in-alt me-3"></i>Se connecter</a></li>
+    <li class="fs-6"><a class="active" href="./?q=registration"><i class="fas fa-user-plus me-3"></i>S'inscrire</a></li>
+    <li class="fs-6"><a href="./?q=contact-us"><i class="fas fa-envelope me-3"></i>Nous contacter</a></li>
 </ul>
 
 <?php $nav = ob_get_clean() ?>
 
 <?php ob_start() ?>
 
-<?php if(isset($_SESSION['leaf']['flash'])): ?>
-    <div class="alert alert-danger text-center text-light bg-red flash flash-error" role="alert">
-        <p><?= Flash::display("connect_failed"); ?></p>
+<?php if(isset($_SESSION['leaf']['flash']['registration_failed'])): ?>
+    <div class="alert alert-red text-center text-light flash flash-error" role="alert">
+        <p class="m-0"><?= Flash::display("registration_failed"); ?></p>
+        <hr>
+        <a class="text-decoration-none text-light" href="mailto:">Ouvrez votre boite mail en cliquant ici</a>
     </div>
 <?php endif; ?>
 
-<form method="POST" class="bg-light m-4 mt-5 mx-auto border border-2 rounded-2 pt-3 px-3" style="max-width:450px">
+<form method="POST" class="bg-light mx-auto border border-2 rounded-2">
 
     <p class="fs-1 fw-semibold">Inscription</p>
 
     <div class="d-flex justify-content-around align-items-center my-4">
         <p class="fw-lighter fs-6 m-0">Vous possédez un compte ? </p>
-        <a href="./?q=login" class="text-danger fs-3 p-0 text-decoration-none fw-medium">Se connecter</a>
+        <a href="./?q=login" class="text-red fs-3 p-0 text-decoration-none fw-medium">Se connecter</a>
     </div>
 
     <label class="form-label mt-1" for="name">Nom</label>
@@ -54,7 +56,7 @@
             <option value="<?= $discipline->discipline_id ?>"><?= ucfirst($discipline->discipline_name) ?></option>
         <? endforeach ?>
     </select>
-    <p class="fw-medium fs-6<?= !empty(Validator::$errors['discipline']) ? 'text-danger' : 'd-none' ?>"><?= Validator::$errors['discipline'] ?? '' ?></p>
+    <p class="fw-medium fs-6 <?= !empty(Validator::$errors['discipline']) ? 'text-danger' : 'd-none' ?>"><?= Validator::$errors['discipline'] ?? '' ?></p>
 
     <label class="form-label mt-1" for="grade">Grades</label>
     <select name="grade" class="form-select fw-light" id="grade">
@@ -65,9 +67,10 @@
     <p class="<?= !empty(Validator::$errors['grade']) ? 'text-danger' : 'd-none' ?>"><?= Validator::$errors['grade'] ?? '' ?></p>
 
     <div class="text-center m-4">
-        <button class="btn btn-danger" type="submit">S'inscrire</button>
+        <button class="btn btn-red text-light" type="submit">S'inscrire</button>
     </div>
 
 </form>
+
 
 <?php $view = ob_get_clean() ?>

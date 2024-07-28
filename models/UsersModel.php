@@ -13,6 +13,16 @@
             return $stmt->fetchAll();
         }
 
+        public function getStudentByEmailFirstnameLastname($email,$firstname,$lastname){
+            $sql = "SELECT * FROM students WHERE student_email = ? AND student_firstname = ? AND student_name = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, $email);
+            $stmt->bindValue(2, $firstname);
+            $stmt->bindValue(3, $lastname);
+            $stmt->execute();
+            return $stmt->fetch();
+        }
+
         public function insertUser($name,$firstname,$birthdate,$subscriptionDate,$email,$password,$lastGradeObtention,$disciplineId,$gradeId,$token){
             $age = $this->getAge($birthdate);
             $rangeAgeId = $this->getAgeRangeId($age);
@@ -34,6 +44,7 @@
             $stmt->bindValue(13,$firstname);
             $stmt->bindValue(14,$email);
             $stmt->execute();
+            return ($this->db->lastInsertId() > 0) ?? false;
         } 
 
         public function checkHash($email){

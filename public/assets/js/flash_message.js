@@ -5,4 +5,7 @@ if (message) {
     setTimeout(() => {
         message.style.top = "-10em";
     }, 4000);
+    setTimeout(() => {
+        message.remove();
+    }, 5000)
 }

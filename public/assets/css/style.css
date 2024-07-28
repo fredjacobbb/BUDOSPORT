@@ -1,42 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Tac+One&display=swap");
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+header .header-logo {
+  max-width: 350px;
+  margin: 2em;
+}
+
+.btn-red {
+  background-color: #a41c27;
+}
+.btn-red:hover {
+  background-color: #a41c27;
+}
+
+.bg-red {
+  background-color: #a41c27;
+}
+
+.text-red {
+  color: #a41c27;
+}
+
+.alert-red {
+  background-color: #a41c27;
+}
+
 h1 {
   color: #f8f9fa;
-  font-size: 3em;
+  display: inline-block;
+  background-color: rgba(215, 215, 215, 0.3058823529);
   font-weight: bolder;
-  text-align: center;
   margin-top: 0.4em;
+  margin-left: 0.2em;
+  font-size: 4rem;
 }
 
 nav ul {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   list-style: none;
   padding: 0;
-  margin-top: 3em;
+  margin-top: 2.8em;
+  margin-bottom: 1.5em;
 }
 nav ul li {
-  min-width: 250px;
   text-align: center;
 }
 nav ul li a {
+  display: block;
+  padding: 0.6em;
+  margin: 0.5em;
+  min-width: 250px !important;
   text-decoration: none;
   color: #f8f9fa;
-  margin: 1em;
-  margin-bottom: 1em !important;
-  padding: 0.4em;
-  min-width: 150px !important;
+}
+nav ul li a:hover:not(active) {
+  background-color: #f8f9fa;
+  color: black;
+}
+
+form {
+  margin-top: 3em !important;
+  max-width: 450px !important;
+  padding: 2em;
+  padding-bottom: 0;
+  margin-bottom: 3em;
 }
 
 .active {
-  background-color: #dc3545;
+  background-color: #a41c27;
+}
+.active:hover {
+  background-color: #a41c27;
+  color: #f8f9fa;
 }
 
 .flash {
   position: absolute;
-  background-color: #dc3545;
   border: 0;
   width: 100%;
   top: -5em;
   transition: top 2s;
+}
+.flash.flash-error {
+  background-color: #a41c27;
+}
+.flash.flash-success {
+  background-color: green;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -28,6 +28,9 @@
             case 'login':
                 $userActionsController->login();
                 break;
+            case 'forgot-password':
+                $userActionsController->passwordForgotten();
+                break;
             case 'admin':
                 if (isset($_GET['action'])) {
                     switch ($_GET['action']) {
@@ -41,13 +44,11 @@
                     }
                 }
                 break;
-            
             default:
-                
+                ViewHandler::render('home');
                 break;
         }
     }else{
-        echo "home";
-        die;
+        ViewHandler::render('home');
     }
 
