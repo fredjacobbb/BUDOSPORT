@@ -2,7 +2,6 @@
 
     use Leaf\Flash;
     use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\SMTP;
 
     class UserActionsController extends BaseModel {
 
@@ -52,11 +51,11 @@
         public function checkInputsLogin(){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (!empty($_POST['firstname']) && !empty($_POST['email']) && !empty($_POST['password'])) {
-                    var_dump("pas ok empty");die;
                     Validator::login($_POST);
-                    var_dump("pas ok");die;
                     if (!Validator::$errors) {
-                        echo "okok";
+                        Flash::set('user_connected');
+                        Flash::set('user_connected_flash');
+                        ViewHandler::render('monespace');
                     }
                 }
             }

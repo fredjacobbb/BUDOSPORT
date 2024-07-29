@@ -45,7 +45,7 @@
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['email']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['name'] ?? '' ?></p>
 
     <label class="form-label mt-1" for="password">Mot de passe</label>
-    <input type="password" name="password" value="okokokokokk" class="form-control fw-light" id="password">
+    <input type="password" name="password" value="Azerty789////" class="form-control fw-light" id="password">
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password'] ?? '' ?></p>
 
     <label class="form-label mt-1" for="birthdate">Date de naissance</label>

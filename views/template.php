@@ -15,26 +15,21 @@
     </header>
 
     <nav class="overflow-x-scroll">
-        <?= $nav ?>
+        <ul>
+            <li class="fs-6"><a href="/"><i class="fas fa-home me-3"></i>Accueil</a></li>
+            <li class="fs-6"><a href="/?q=schedules"><i class="fas fa-clock me-3"></i>Les horaires</a></li>
+            <li class="fs-6"><a href="./?q=disciplines"><i class="fas fa-user-ninja me-3"></i>Les disciplines</a></li>
+            <?=  ?><li class="fs-6"><a href="./?q=login"><i class="fas fa-sign-in-alt me-3"></i>Se connecter</a></li>
+            <li class="fs-6"><a href="./?q=registration"><i class="fas fa-user-plus me-3"></i>S'inscrire</a></li>
+            <li class="fs-6"><a href="./?q=contact-us"><i class="fas fa-envelope me-3"></i>Nous contacter</a></li>
+        </ul>
     </nav>
 
     <?= $view ?>
 
-    <!-- <footer class="row h-100 bg-red">
-        <div class="col-12 col-md-4">
-            <p>Nous contacter</p>
-            <p></p>
-        </div>
-        <div class="col-12 col-md-4"></div>
-        <div class="col-12 col-md-4"></div>
-    </footer> -->
-
     <footer class="container-fluid bg-red text-light pt-5 pb-2 mt-5">
         <div class="row align-items-center justify-content-around">
             <div class="col-md-4 col-12 mb-4">
-                <!-- <div class="mw-25">
-                    <!-- <img class="img-fluid" src="public/assets/img/header_logo.webp" alt="">
-                </div>-->
                 <p class="fs-2"><strong>BUDOSPORT 80</strong></p>
                 <p>14 rue colbert 80480 AMIENS</p>
                 <p><a href="tel:+0612121212" class="text-light text-decoration-none">Tél : 0612121212</a></p>
