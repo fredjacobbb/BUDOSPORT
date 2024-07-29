@@ -35,6 +35,7 @@
                                 return false;
                             }else{
                                 Flash::set("Un email de validation vous a été envoyé, cliquez sur le lien pour activer le compte.", "registration_success");
+                                $this->sendEmailActivationAccount();
                                 return true;
                             }
                         }
@@ -51,9 +52,11 @@
         public function checkInputsLogin(){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (!empty($_POST['firstname']) && !empty($_POST['email']) && !empty($_POST['password'])) {
-                    Validator::registration($_POST);
+                    var_dump("pas ok empty");die;
+                    Validator::login($_POST);
+                    var_dump("pas ok");die;
                     if (!Validator::$errors) {
-                        
+                        echo "okok";
                     }
                 }
             }
@@ -85,7 +88,28 @@
         }
 
         public function sendEmailActivationAccount(){
-
+            try {                
+                $this->phpMailer->isSMTP();
+                $this->phpMailer->Host = 'smtp.gmail.com';
+                $this->phpMailer->Port = 465;
+                $this->phpMailer->SMTPAuth = true;
+                $this->phpMailer->SMTPSecure = 'ssl';
+                $this->phpMailer->Username = 'frdjacobbb@gmail.com';
+                $this->phpMailer->Password = 'jvnw eepr qrzm bszn';
+                $this->phpMailer->setFrom('frdjacobbb@gmail.com', 'BUDOSPORT-80-');
+                $this->phpMailer->addAddress('merguez.on.my.back@gmail.com', 'Destinataire');
+                $this->phpMailer->Subject = 'Valider l\'accès à votre compte !';
+                $this->phpMailer->Body = '<a href="./?q=update-password&student_id=$student_id&token=$student_token">Changer votre mot de passe en cliquant sur ce lien</a>';
+                if (!$this->phpMailer->send()) {
+                    Flash::set("L'envoi de l'email à échoué, veuillez réessayer. Si le problème persiste, contactez nous.", "error_mail_send");
+                    return false;
+                }else{
+                    Flash::set('Vous allez recevoir un mail d\'ici quelques minutes.', 'success_mail_send');
+                    return true;
+                }
+            } catch (\Throwable $th) {
+                var_dump($th);die;
+            }
         }
 
         public function passwordForgotten(){

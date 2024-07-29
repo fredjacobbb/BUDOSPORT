@@ -38,7 +38,7 @@
                             if (!preg_match($rule['regex'], $post)) {
                                 self::$errors[$key_post] = "La chaine $key_post n'est pas attendue comme cela !";
                             }
-                        }elseif (!filter_var($post['email'])) {
+                        }elseif (!filter_var($post)) {
                             self::$errors['email'] = "L'adresse mail n'est pas conforme !";
                         }
                     }
@@ -49,7 +49,7 @@
         public static function login($posts){
             foreach ($posts as $key_post => $post) {
                 foreach (self::$securesRulesLogin as $key_rule => $rule) {
-                    if ($key_post !== $key_rule) {
+                    if ($key_post == $key_rule) {
                         if (gettype($post) !== $rule['type']) {
                             self::$errors[$key_post] = "La saisie n'est pas attendue ici !";
                         }elseif (strlen($post) >= $rule['min']) {

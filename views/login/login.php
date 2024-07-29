@@ -27,8 +27,8 @@
     <p class="fs-1 fw-semibold mb-5">Connexion</p>
 
     <label for="email" class="form-label">Email</label>
-    <input name="student_email" type="text" placeholder="frdjacobbb@gmail.ze" class="form-control mb-2 fw-light" id="email">
-    <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['student_email']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['name'] ?? '' ?></p>
+    <input name="email" type="text" placeholder="frdjacobbb@gmail.ze" class="form-control mb-2 fw-light" id="email">
+    <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['email']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['email'] ?? '' ?></p>
 
     <label for="firstname" class="form-label">Prénom</label>
     <input type="text" placeholder="fred" class="form-control mb-2 fw-light" id="firstname">
