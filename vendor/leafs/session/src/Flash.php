@@ -15,7 +15,7 @@ use Leaf\Http\Session;
 class Flash
 {
     private static $config = [
-        'key' => 'leaf.flash',
+        'key' => 'budosport',
         'default' => 'message',
         'saved' => 'leaf.flashSaved',
     ];
@@ -137,4 +137,5 @@ class Flash
     {
         return Session::get(static::$config['saved']);
     }
+
 }

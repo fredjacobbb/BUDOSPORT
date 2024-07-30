@@ -33,8 +33,8 @@
                                 Flash::set("Désolé, il semblerait que vous soyez déja inscrit, vérifiez vos mails.", "registration_failed");
                                 return false;
                             }else{
-                                Flash::set("Un email de validation vous a été envoyé, cliquez sur le lien pour activer le compte.", "registration_success");
                                 $this->sendEmailActivationAccount();
+                                Flash::set("Un email de validation vous a été envoyé, cliquez sur le lien pour activer le compte.", "registration_success");
                                 return true;
                             }
                         }
@@ -53,8 +53,8 @@
                 if (!empty($_POST['firstname']) && !empty($_POST['email']) && !empty($_POST['password'])) {
                     Validator::login($_POST);
                     if (!Validator::$errors) {
-                        Flash::set('user_connected');
-                        Flash::set('user_connected_flash');
+                        Flash::set('user_connected', 1);
+                        Flash::set('user_connected_flash','Vous êtes connecté, bienvenue !');
                         ViewHandler::render('monespace');
                     }
                 }

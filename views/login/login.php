@@ -1,14 +1,7 @@
 <?php use Leaf\Flash ?>
+<?php use Leaf\Http\Session ?>
 
 <?php ob_start() ?>
-
-<?php if(isset($_SESSION['leaf']['flash']['success_mail_send'])): ?>
-    <div class="alert alert-success text-center text-light flash flash-success" role="alert">
-        <p class="m-0"><?= Flash::display("success_mail_send"); ?></p>
-        <hr>
-        <a class="text-decoration-none text-light" href="mailto:">Ouvrez votre boite mail en cliquant ici</a>
-    </div>
-<?php endif; ?>
 
 <form method="POST" class="bg-light mx-auto border border-2 rounded-2">
 

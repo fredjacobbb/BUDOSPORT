@@ -1,6 +1,6 @@
-<?php ob_start() ?>
+<?php use Leaf\Flash ?>
 
-<?php use Leaf\Flash; ?>
+<?php ob_start() ?>
 
 <ul>
     <li class="fs-6"><a href="/"><i class="fas fa-home me-3"></i>Accueil</a></li>
@@ -15,7 +15,7 @@
 
 <?php ob_start() ?>
 
-<?php if(isset($_SESSION['leaf']['flash']['registration_failed'])): ?>
+<?php if(!empty($_SESSION['budosport']['registration_failed'])): ?>
     <div class="alert alert-red text-center text-light flash flash-error" role="alert">
         <p class="m-0"><?= Flash::display("registration_failed"); ?></p>
         <hr>

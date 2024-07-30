@@ -2,8 +2,13 @@
 
     require_once __DIR__ . '/vendor/autoload.php';
 
+    use Leaf\Http\Session;
+
+    Session::start();
+
     require 'helpers/TokenGenerator.php';
     require 'helpers/Validator.php';
+    require 'helpers/Flash.php';
 
     require 'models/BaseModel.php';
     require 'models/ConnectDb.php';
