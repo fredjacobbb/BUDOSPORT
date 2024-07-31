@@ -25,7 +25,7 @@
 
     // $adminController = new AdminController();
     $userActionsController = new UserActionsController(new DisciplinesModel(), new UsersModel(), new GradesModel());
-    $adminActionsController = new AdminController(new SchedulesController(new SchedulesModel(), new DisciplinesModel()));
+    $adminActionsController = new AdminController(new SchedulesController(new SchedulesModel(), new DisciplinesModel(), new UsersModel()));
 
     if (isset($_GET['q'])) {
         switch ($_GET['q']) {

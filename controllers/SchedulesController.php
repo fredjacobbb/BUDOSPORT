@@ -5,16 +5,41 @@
         
         public function __construct(protected $schedulesModel, protected $disciplinesModel, protected $usersModel){}
 
-        protected $days = ['lundi','mardi','mercredi', 'jeudi','vendredi','samedi','dimanche'];
+        protected $days = ['lundi','mardi','mercredi', 'jeudi','vendredi','samedi'];
 
+        protected $fuck = [];
 
         public function listSchedules(){
-            foreach ($this->schedulesModel->getAll() as $key => $value) {
-                foreach ($this->days as $key => $value) {
-                    var_dump($key);
+            foreach ($this->usersModel->getAllAgesRanges() as $age_range) {
+                foreach ($this->schedulesModel->getAllSchedules() as $schedule) {
+                    if ($schedule->age_id === $age_range->age_id) {
+                        foreach ($this->disciplinesModel->getAll() as $discipline) {
+                            if ($schedule->discipline_id === $discipline->discipline_id) {
+                                foreach($this->days as $int_day => $day){
+                                    if ($schedule->day === $int_day + 1) {
+                                        # code...
+                                        // $this->fuck['ages'][$age_range->age_tranche][$discipline->discipline_name][$day] = $schedule;
+                                        $this->fuck['ages'][$age_range->age_tranche]['disciplines'][$discipline->discipline_name]['days'][$day] = $schedule;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            die;
+            var_dump($this->fuck);die;
+            // foreach ($this->usersModel->getAllAgesRanges() as $age_range) {
+            //     foreach ($this->schedulesModel->getAllSchedules() as $schedule) {
+            //         if ($schedule->age_id === $age_range->age_id) {
+            //             foreach ($this->disciplinesModel->getAll() as $discipline) {
+            //                 if ($schedule->discipline_id === $discipline->discipline_id) {
+            //                     $this->fuck[$age_range->age_tranche][$discipline->discipline_name][$this->days[$]] = $schedule;
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+            var_dump($this->fuck);
         }
 
 

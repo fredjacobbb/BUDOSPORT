@@ -6,8 +6,8 @@
             parent::__construct();
         }
 
-        public function getAll(){
-            $sql = "SELECT * FROM `schedules`;";
+        public function getAllSchedules(){
+            $sql = "SELECT * FROM `schedules` ORDER BY FIELD(day, '1', '2', '3', '4', '5', '6');";
             $stmt = $this->db->query($sql);
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }

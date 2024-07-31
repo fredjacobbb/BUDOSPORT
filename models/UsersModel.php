@@ -71,7 +71,7 @@
             $sql = "SELECT * FROM `ages_ranges`";
             $res = $this->db->query($sql);
             $res->execute();
-            return $res->fetchAll();
+            return $res->fetchAll(PDO::FETCH_OBJ);
         }
 
         public function getAge($birthdate){
