@@ -15,6 +15,7 @@
     require 'models/UsersModel.php';
     require 'models/DisciplinesModel.php';
     require 'models/GradesModel.php';
+    require 'models/SchedulesModel.php';
     
     require 'viewer/ViewHandler.php';
 
@@ -23,7 +24,8 @@
     require 'controllers/SchedulesController.php';
 
     // $adminController = new AdminController();
-    $userActionsController = new UserActionsController(new DisciplinesModel(), new UsersModel(), new GradesModel(), new Validator());
+    $userActionsController = new UserActionsController(new DisciplinesModel(), new UsersModel(), new GradesModel());
+    $adminActionsController = new AdminController(new SchedulesController(new SchedulesModel(), new DisciplinesModel()));
 
     if (isset($_GET['q'])) {
         switch ($_GET['q']) {
@@ -39,8 +41,8 @@
             case 'admin':
                 if (isset($_GET['action'])) {
                     switch ($_GET['action']) {
-                        case 'schedulesPanel':
-                            
+                        case 'schedules':
+                            $adminActionsController->schedulesController();
                             break;
                         
                         default:

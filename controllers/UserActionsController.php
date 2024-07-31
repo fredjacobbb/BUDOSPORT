@@ -11,7 +11,7 @@
         }
 
         public function registration(){
-            return $this->checkInputsRegistration() ? ViewHandler::render('home') : ViewHandler::render('registration',disciplines:$this->disciplinesModel->getAll(), ages:$this->usersModel->getAllAgesRanges(), grades:$this->gradesModel->getAll());
+            return $this->checkInputsRegistration() ? ViewHandler::render('login') : ViewHandler::render('registration',disciplines:$this->disciplinesModel->getAll(), ages:$this->usersModel->getAllAgesRanges(), grades:$this->gradesModel->getAll());
         }
 
         public function checkInputsRegistration(){
@@ -98,12 +98,23 @@
                 $this->phpMailer->setFrom('frdjacobbb@gmail.com', 'BUDOSPORT-80-');
                 $this->phpMailer->addAddress('merguez.on.my.back@gmail.com', 'Destinataire');
                 $this->phpMailer->Subject = 'Valider l\'accès à votre compte !';
-                $this->phpMailer->Body = '<a href="./?q=update-password&student_id=$student_id&token=$student_token">Changer votre mot de passe en cliquant sur ce lien</a>';
+                $this->phpMailer->Body = '
+                    <!DOCTYPE html>
+                    <html>
+                        <head>
+                            <meta charset="UTF-8">
+                        </head>
+                        <body>
+                            <p>Bonjour $pseudo, clique sur ce lien pour valider ton compte.</p>
+                            <a href="./?q=active-account&student_id=$student_id&token=$student_token">ACTIVER MON COMPTE</a>
+                        </body>
+                    </html>
+                    ';
+                $this->phpMailer->isHTML();
                 if (!$this->phpMailer->send()) {
                     Flash::set("L'envoi de l'email à échoué, veuillez réessayer. Si le problème persiste, contactez nous.", "error_mail_send");
                     return false;
                 }else{
-                    Flash::set('Vous allez recevoir un mail d\'ici quelques minutes.', 'success_mail_send');
                     return true;
                 }
             } catch (\Throwable $th) {

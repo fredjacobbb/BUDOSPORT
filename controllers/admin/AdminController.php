@@ -1,9 +1,13 @@
 <?php     
 
-    class AdminController extends BaseModel {
+    class AdminController {
 
-        public function __construct($schedulesController = new SchedulesController()){
+        public function __construct(protected $schedulesController = new SchedulesController(new SchedulesModel(), new DisciplinesModel(), new UsersModel())){
+            
+        }
 
+        public function schedulesController(){
+            $this->schedulesController->listSchedules();
         }
 
 

@@ -4,8 +4,7 @@
 
         public static function connect(){
             try {
-                $pdo = new PDO('mysql:host=mysql;dbname=budosport','root','example');
-                return $pdo;
+                return new PDO('mysql:host=mysql;dbname=budosport','root','example');
             } catch (PDOException $e) {
                 echo $e->getMessage();
                 die;
@@ -13,5 +12,4 @@
         }
 
     }
-
     

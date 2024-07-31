@@ -7,13 +7,13 @@
         }
 
         public function getAll(){
-            $sql = "SELECT * FROM disciplines";
+            $sql = "SELECT * FROM disciplines;";
             $stmt = $this->db->query($sql);
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
         public function getOne($id){
-            $sql = "SELECT * FROM disciplines WHERE discipline_id = ?";
+            $sql = "SELECT * FROM disciplines WHERE discipline_id = ?;";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $id,PDO::PARAM_INT);
             $stmt->execute();
