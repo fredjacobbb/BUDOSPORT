@@ -7,7 +7,8 @@
         }
 
         public function schedulesController(){
-            $this->schedulesController->listSchedules();
+            $schedules = $this->schedulesController->listSchedules();
+            ViewHandler::render("schedules", schedules:$schedules);
         }
 
 

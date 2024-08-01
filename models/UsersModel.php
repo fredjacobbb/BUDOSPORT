@@ -69,15 +69,16 @@
 
         public function getAllAgesRanges(){
             $sql = "SELECT * FROM `ages_ranges`";
-            $res = $this->db->query($sql);
-            $res->execute();
-            return $res->fetchAll(PDO::FETCH_OBJ);
+            $stmt = $this->db->query($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
         public function getAge($birthdate){
             $birthdate = new \DateTime($birthdate);
             return $birthdate->diff(new \DateTime())->y;
         }
+        
 
         public function getAgeId($range){
             $sql = "SELECT age_id FROM ages_ranges WHERE age_tranche = ?";

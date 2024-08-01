@@ -6,33 +6,39 @@
 
         protected $days = ['lundi','mardi','mercredi', 'jeudi','vendredi','samedi'];
 
-        protected $allSchedules = [];
+        protected $schedulesList;
         
         public function listSchedules(){
-            foreach ($this->usersModel->getAllAgesRanges() as $age_range) {
-                
-            }
-        }
 
-        // public function listSchedules(){
-        //     foreach ($this->usersModel->getAllAgesRanges() as $age_range) {
-        //         foreach ($this->schedulesModel->getAllSchedules() as $schedule) {
-        //             if ($schedule->age_id === $age_range->age_id) {
-        //                 foreach ($this->disciplinesModel->getAll() as $discipline) {
-        //                     if ($schedule->discipline_id === $discipline->discipline_id) {
-        //                         foreach($this->days as $int_day => $day){
-        //                             if ($schedule->day === $int_day + 1) {
-        //                                 # code...
-        //                                 // $this->fuck['ages'][$age_range->age_tranche][$discipline->discipline_name][$day] = $schedule;
-        //                                 $this->fuck['ages'][$age_range->age_tranche]['disciplines'][$discipline->discipline_name]['days'][$day] = $schedule;
-        //                             }
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        //     var_dump($this->fuck);die;
-        // }
+            $this->schedulesList = new ArrayObject();
+            $this->schedulesList->ages = [];
+            $this->schedulesList->disciplines = new ArrayObject();
+
+        
+            foreach ($this->usersModel->getAllAgesRanges() as $age_range) {
+                foreach ($this->disciplinesModel->getAllDisciplines() as $discipline) {
+                   foreach ($this->schedulesModel->getAllSchedules() as $schedule) {
+                        if ($schedule->age_id === $age_range->age_id) {
+                            if ($schedule->discipline_id === $discipline->discipline_id) {
+                                foreach ($this->days as $item_day => $day) {
+                                    if ($schedule->day === $item_day + 1) {
+
+                                        $age = (object) array('value' => $age_range->age_tranche);
+                                        // $this->schedulesList->ages['age'][$age_range->age_tranche]['discipline'][$discipline->discipline_name]['day'][$day] = $schedule;
+                                        $this->schedulesList->ages[] = $age;
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            foreach ($this->schedulesList as $key => $value) {
+                var_dump($value);
+            }
+            die;
+            return $this->schedulesList;
+        }
 
     }

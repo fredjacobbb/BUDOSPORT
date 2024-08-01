@@ -6,7 +6,7 @@
             parent::__construct();
         }
 
-        public function getAll(){
+        public function getAllDisciplines(){
             $sql = "SELECT * FROM disciplines;";
             $stmt = $this->db->query($sql);
             return $stmt->fetchAll(PDO::FETCH_OBJ);
