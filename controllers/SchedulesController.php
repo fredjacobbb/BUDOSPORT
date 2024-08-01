@@ -19,7 +19,8 @@
                     $this->schedulesList->ages[$key_age]->disciplines[$key_discipline]->schedules = $this->schedulesModel->getSchedulesByAgeAndDiscipline($age_range->age_id, $discipline->discipline_id);  
                 }
             }
-            return $this->schedulesList;
+            $schedules = $this->schedulesList;
+            return $schedules;
         }
 
     }

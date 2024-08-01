@@ -99,4 +99,8 @@ form {
   background-color: green;
 }
 
+.minw {
+  min-width: 100% !important;
+}
+
 /*# sourceMappingURL=style.css.map */
