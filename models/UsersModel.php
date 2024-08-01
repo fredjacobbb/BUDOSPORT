@@ -26,6 +26,7 @@
         public function insertUser($name,$firstname,$birthdate,$subscriptionDate,$email,$password,$lastGradeObtention,$disciplineId,$gradeId,$token){
             $age = $this->getAge($birthdate);
             $rangeAgeId = $this->getAgeRangeId($age);
+            var_dump($rangeAgeId);die;
             $sql = "INSERT INTO students(student_name,student_firstname,student_birthdate,subscription_date,student_email,student_password,last_grade_obtention,discipline_id,age_id,grade_id,student_token)
                     SELECT ?,?,?,?,?,?,?,?,?,?,? WHERE NOT EXISTS (SELECT * FROM students WHERE student_name = ? AND student_firstname = ? AND student_email = ?)";
             $stmt = $this->db->prepare($sql);
@@ -56,13 +57,20 @@
         }
 
         public function getAgeRangeId($age){
-            $ranges = $this->getAllAgesRanges();
-            foreach ($ranges as $range) {
-                list($start,$end) = explode("-",$range[1]);
-                $start = intval($start);
-                $end = intval($end);
-                if ($age >= $start && $age <= $end) {
-                    return $range[0];
+            // $ranges = $this->getAllAgesRanges();
+            // foreach ($ranges as $range) {
+            //     list($start,$end) = explode("-",$range[1]);
+            //     $start = intval($start);
+            //     $end = intval($end);
+            //     if ($age >= $start && $age <= $end) {
+            //         return $range[0];
+            //     }
+            // }
+            foreach ($this->getAllAgesRanges() as $age_range) {
+                if ($age >= intval($age_range->age_tranche[0]) && $age <= intval($age_range->age_tranche[2])) {
+                    return $age_range->age_id;
+                }else{
+                    echo "pas ok";die;
                 }
             }
         }

@@ -11,7 +11,7 @@
         }
 
         public function registration(){
-            return $this->checkInputsRegistration() ? ViewHandler::render('login') : ViewHandler::render('registration',disciplines:$this->disciplinesModel->getAll(), ages:$this->usersModel->getAllAgesRanges(), grades:$this->gradesModel->getAll());
+            return $this->checkInputsRegistration() ? ViewHandler::render('login') : ViewHandler::render('registration',disciplines:$this->disciplinesModel->getAllDisciplines(), ages:$this->usersModel->getAllAgesRanges(), grades:$this->gradesModel->getAll());
         }
 
         public function checkInputsRegistration(){

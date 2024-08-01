@@ -11,7 +11,6 @@
         public function listSchedules(){
 
             $this->schedulesList = new stdClass();
-            // $this->schedulesList->ages = [];
             $this->schedulesList->ages = $this->usersModel->getAllAgesRanges();
             foreach ($this->schedulesList->ages as $key_age=>$age_range) {
                 $this->schedulesList->ages[$key_age]->disciplines = $this->disciplinesModel->getAllDisciplinesByAgeId($age_range->age_id);
@@ -19,8 +18,7 @@
                     $this->schedulesList->ages[$key_age]->disciplines[$key_discipline]->schedules = $this->schedulesModel->getSchedulesByAgeAndDiscipline($age_range->age_id, $discipline->discipline_id);  
                 }
             }
-            $schedules = $this->schedulesList;
-            return $schedules;
+            return $this->schedulesList;
         }
 
     }
