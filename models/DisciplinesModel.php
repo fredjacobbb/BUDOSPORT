@@ -19,4 +19,12 @@
             $stmt->execute();
         }
 
+        public function getAllDisciplinesByAgeId($age_id){
+            $sql = 'SELECT `d`.`discipline_id`, `d`.`discipline_name` FROM `disciplines` AS `d` INNER JOIN `schedules` AS `s` ON `d`.`discipline_id` = `s`.`discipline_id` WHERE `s`.`age_id` = ? GROUP BY `d`.`discipline_id`';
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, $age_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
     }
