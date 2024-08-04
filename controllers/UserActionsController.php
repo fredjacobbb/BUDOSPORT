@@ -16,7 +16,7 @@
 
         public function checkInputsRegistration(){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if (!empty($_POST['name'] && !empty($_POST['firstname']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['birthdate'] && !empty($_POST['discipline']) && !empty($_POST['grade'])))) {
+                if (!empty($_POST['name'] && !empty($_POST['firstname']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['password-retyped']) && !empty($_POST['birthdate'] && !empty($_POST['discipline']) && !empty($_POST['grade'])))) {
                     Validator::registration($_POST);
                     if (!Validator::$errors) {
                         $name = filter_var($_POST['name']);
@@ -28,16 +28,34 @@
                         $grade = filter_var($_POST['grade'], FILTER_VALIDATE_INT);
                         $bd_fragment = explode('-',$birthdate);
                         $token = TokenGenerator::getRandomStringRandomInt();
-                        if(checkdate($bd_fragment[2],$bd_fragment[1],$bd_fragment[0]) && $name && $firstname && $email && $password && $birthdate && $discipline && $grade){
-                            if(!$this->usersModel->insertUser($name,$firstname,$birthdate,date('Y-m-d H:m'),$email,$password,date("Y-m-d H:m"),$discipline,$grade,$token)){
-                                Flash::set("Désolé, il semblerait que vous soyez déja inscrit, vérifiez vos mails.", "registration_failed");
-                                return false;
-                            }else{
-                                $this->sendEmailActivationAccount();
-                                Flash::set("Un email de validation vous a été envoyé, cliquez sur le lien pour activer le compte.", "registration_success");
-                                return true;
+                        if ($_POST['password'] === $_POST['password-retyped']) {
+                            if(checkdate($bd_fragment[2],$bd_fragment[1],$bd_fragment[0]) && $name && $firstname && $email && $password && $birthdate && $discipline && $grade){
+                                if(!$this->usersModel->insertUser($name,$firstname,$birthdate,date('Y-m-d H:m'),$email,$password,date("Y-m-d H:m"),$discipline,$grade,$token)){
+                                    Flash::set("Désolé, il semblerait que vous soyez déja inscrit, vérifiez vos mails.", "registration_failed");
+                                    return false;
+                                }else{
+                                    $this->sendEmailActivationAccount();
+                                    Flash::set("Un email de validation vous a été envoyé, cliquez sur le lien pour activer le compte.", "registration_success");
+                                    return true;
+                                }
                             }
+                        }else{
+                            // a changer de place
+                            Validator::$errors['password-retyped'] = "Les mots de passe ne correspondent pas !";
                         }
+                    }
+                }
+            }
+        }
+
+        public function validAccountMail(){
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                if (!empty($_GET['token'])) {
+                    if($this->usersModel->validStudentTokenMail($_GET['token'])){
+                        Flash::set('Votre compte à été validé, l\'administrateur va accepter votre demande.', 'valid_email_checking');
+                        ViewHandler::render('login');
+                    }else{
+                        ViewHandler::render('home');
                     }
                 }
             }
@@ -145,6 +163,25 @@
             }
         }
 
-        //Flash::set("Les informations saisies semblent incorrects.", "change_password_error")
+        public function changePassword(){
+            if (!empty($_GET['token'])) {
+                if(!$this->usersModel->getStudentByToken($_GET['token'])){
+                    ViewHandler::render('home');
+                }else{
+                    if (!empty($_POST['password'])) {
+                        Validator::passwordChanging($_POST);
+                        if (!Validator::$errors) {
+                            if($this->usersModel->changePassword($_POST['password'], $_GET['token'])){
+                                Flash::set('Votre mot de passe à été changé avec succès.', 'change_password_success');
+                                ViewHandler::render('login','login');
+                            }else{
+                                ViewHandler::render('change-password');
+                            }
+                        }
+                    }
+                    ViewHandler::render('change-password');
+                }
+            }
+        }
 
     }

@@ -1,5 +1,4 @@
 <?php
-
     
     class UsersModel extends BaseModel {
 
@@ -11,6 +10,27 @@
             $sql = "SELECT `student_firstname`,`student_name` FROM `students`";
             $stmt = $this->db->query($sql);
             return $stmt->fetchAll();
+        }
+
+        public function getStudentByToken($token){
+            $sql = "SELECT 1 FROM students WHERE student_token = ?;";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1,$token);
+            $stmt->execute();
+            return $stmt->fetch();
+        }
+
+        public function validStudentTokenMail($token){
+            $sql = "UPDATE students SET student_valid = ? WHERE student_token = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, '1');
+            $stmt->bindValue(2, $token);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return true;
+            }else{
+                return false;
+            }
         }
 
         public function getStudentByEmailFirstnameLastname($email,$firstname,$lastname){
@@ -26,7 +46,6 @@
         public function insertUser($name,$firstname,$birthdate,$subscriptionDate,$email,$password,$lastGradeObtention,$disciplineId,$gradeId,$token){
             $age = $this->getAge($birthdate);
             $rangeAgeId = $this->getAgeRangeId($age);
-            var_dump($rangeAgeId);die;
             $sql = "INSERT INTO students(student_name,student_firstname,student_birthdate,subscription_date,student_email,student_password,last_grade_obtention,discipline_id,age_id,grade_id,student_token)
                     SELECT ?,?,?,?,?,?,?,?,?,?,? WHERE NOT EXISTS (SELECT * FROM students WHERE student_name = ? AND student_firstname = ? AND student_email = ?)";
             $stmt = $this->db->prepare($sql);
@@ -57,22 +76,12 @@
         }
 
         public function getAgeRangeId($age){
-            // $ranges = $this->getAllAgesRanges();
-            // foreach ($ranges as $range) {
-            //     list($start,$end) = explode("-",$range[1]);
-            //     $start = intval($start);
-            //     $end = intval($end);
-            //     if ($age >= $start && $age <= $end) {
-            //         return $range[0];
-            //     }
-            // }
             foreach ($this->getAllAgesRanges() as $age_range) {
-                if ($age >= intval($age_range->age_tranche[0]) && $age <= intval($age_range->age_tranche[2])) {
-                    return $age_range->age_id;
-                }else{
-                    echo "pas ok";die;
+                $ages = explode('-', $age_range->age_tranche);                
+                if ($age >= intval($ages[0]) && $age <= intval($ages[1])) {
+                    return intval($age_range->age_id);
                 }
-            }
+            }      
         }
 
         public function getAllAgesRanges(){
@@ -95,6 +104,20 @@
             $stmt->execute();
             $range = $stmt->fetch();
             return $range[0];
+        }
+
+        public function changePassword($password, $token){
+            $password = password_hash($password, PASSWORD_BCRYPT);
+            $sql = "UPDATE students SET student_password = ? WHERE student_token = ?;";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1,$password);
+            $stmt->bindValue(2, $token);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return true;
+            }else{
+                return false;
+            }
         }
 
     }

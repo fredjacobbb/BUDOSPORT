@@ -9,6 +9,23 @@
         <a class="text-decoration-none text-light" href="mailto:">Ouvrez votre boite mail en cliquant ici</a>
     </div>
 <?php endif; ?>
+<?php if(isset($_SESSION['budosport']['success_mail_send'])): ?>
+    <div class="alert alert-success text-center text-light flash flash-success" role="alert">
+        <p class="m-0"><?= Flash::display("success_mail_send"); ?></p>
+        <hr>
+        <a class="text-decoration-none text-light" href="mailto:">Ouvrez votre boite mail en cliquant ici</a>
+    </div>
+<?php endif; ?>
+<?php if(isset($_SESSION['budosport']['valid_email_checking'])): ?>
+    <div class="alert alert-success text-center text-light flash flash-success" role="alert">
+        <p class="m-0"><?= Flash::display("valid_email_checking"); ?></p>
+    </div>
+<?php endif; ?>
+<?php if(isset($_SESSION['budosport']['change_password_success'])): ?>
+    <div class="alert alert-success text-center text-light flash flash-success" role="alert">
+        <p class="m-0"><?= Flash::display("change_password_success"); ?></p>
+    </div>
+<?php endif; ?>
 
 <form method="POST" class="bg-light mx-auto border border-2 rounded-2">
 

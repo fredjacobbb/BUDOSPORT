@@ -42,5 +42,4 @@
     </div>
 </div>
 
-
 <?php $view = ob_get_clean(); ?>

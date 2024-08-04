@@ -15,7 +15,7 @@ header {
 }
 header .header-logo {
   max-width: 16em;
-  margin: 1em 2em;
+  margin: 2em 2em;
 }
 
 .btn-red {
@@ -35,6 +35,10 @@ header .header-logo {
 
 .alert-red {
   background-color: #a41c27;
+}
+
+nav {
+  scrollbar-color: #a41c27 silver;
 }
 
 h1 {
@@ -114,12 +118,11 @@ p {
 }
 
 @media (width > 700px) {
-  h1 {
+  header {
     text-align: start !important;
   }
-  .header-logo {
-    margin: 3em;
-    max-width: 350px;
+  header .header-logo {
+    min-width: 380px;
   }
 }
 

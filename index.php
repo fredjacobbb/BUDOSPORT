@@ -38,6 +38,12 @@
             case 'forgot-password':
                 $userActionsController->passwordForgotten();
                 break;
+            case 'change-password':
+                $userActionsController->changePassword();
+                break;
+            case 'valid-account-mail':
+                $userActionsController->validAccountMail();
+                break;
             case 'admin':
                 if (isset($_GET['action'])) {
                     switch ($_GET['action']) {

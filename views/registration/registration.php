@@ -27,9 +27,9 @@
 
     <p class="fs-1 fw-semibold">Inscription</p>
 
-    <div class="d-flex justify-content-around align-items-center my-4">
+    <div class="d-flex justify-content-around flex-wrap flex-sm-nowrap align-items-center my-4">
         <p class="fw-lighter fs-6 m-0">Vous possédez un compte ? </p>
-        <a href="./?q=login" class="text-red fs-3 p-0 text-decoration-none fw-medium">Se connecter</a>
+        <a href="./?q=login" class="text-red fs-3 p-3 text-decoration-none fw-medium p-sm-0">Se connecter</a>
     </div>
 
     <label class="form-label mt-1" for="name">Nom</label>
@@ -47,6 +47,11 @@
     <label class="form-label mt-1" for="password">Mot de passe</label>
     <input type="password" name="password" value="Azerty789////" class="form-control fw-light" id="password">
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password'] ?? '' ?></p>
+    <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password-retyped']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password-retyped'] ?? '' ?></p>
+
+
+    <label class="form-label mt-1" for="password">Re-mot de passe</label>
+    <input type="password" name="password-retyped" value="Azerty789////" class="form-control fw-light" id="password">
 
     <label class="form-label mt-1" for="birthdate">Date de naissance</label>
     <input class="form-control fw-light" name="birthdate" value="2000-08-05" type="date">
