@@ -15,13 +15,13 @@
 
 <?php ob_start() ?>
 
-<?php if(isset($_SESSION['leaf']['flash']['change_password_error'])): ?>
+<?php if(isset($_SESSION['budosport']['change_password_error'])): ?>
     <div class="alert alert-red text-center text-light flash flash-error" role="alert">
         <p class="m-0"><?= Flash::display("change_password_error"); ?></p>
     </div>
 <?php endif; ?>
 
-<?php if(isset($_SESSION['leaf']['flash']['error_mail_send'])): ?>
+<?php if(isset($_SESSION['budosport']['error_mail_send'])): ?>
     <div class="alert alert-red text-center text-light flash flash-error" role="alert">
         <p class="m-0"><?= Flash::display("error_mail_send"); ?></p>
         <hr>

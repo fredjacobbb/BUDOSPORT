@@ -21,7 +21,7 @@
         ];
 
         public static array $securesRulesResetPassword = [
-            "email" => ['type' => 'string', 'min' => 10, 'max' => 150],
+            "email" => ['type' => 'string', 'min' => 5, 'max' => 150],
             "firstname" => ['type' => 'string', 'min' => 1, 'max' => 50, 'regex' => '/^[A-Za-z][\p{L}-]*$/'],
             "name" => ['type' => 'string', 'min' => 1, 'max' => 150, 'regex' => '/^[A-Za-z][\p{L}-]*$/'],
         ];

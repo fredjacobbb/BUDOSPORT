@@ -12,6 +12,15 @@
             return $stmt->fetchAll();
         }
 
+        public function getStudentByEmailFirstname($email,$firstname){
+            $sql = "SELECT * FROM `students` WHERE student_email = ? AND student_firstname = ?;";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, $email);
+            $stmt->bindValue(2, $firstname);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }
+
         public function getStudentByToken($token){
             $sql = "SELECT 1 FROM students WHERE student_token = ?;";
             $stmt = $this->db->prepare($sql);
@@ -72,7 +81,30 @@
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $email);
             $stmt->execute();
-            return $stmt->fetch();
+            if($student = $stmt->fetch()){
+                return $student['student_password'];
+            }else{
+                var_dump("no ok");die;
+            }
+        }
+
+        public function checkPasswordLogin($email,$firstname,$password){
+            $passwordHash = $this->checkHash($email);
+            $sql = 'SELECT * FROM students WHERE student_email = ? AND student_firstname = ?';
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, $email);
+            $stmt->bindValue(2, $firstname);
+            $stmt->execute();
+            if($stmt->fetch()){
+                if(password_verify($password, $passwordHash)){
+                    $_SESSION['user_info'] = $stmt->fetch();
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
         }
 
         public function getAgeRangeId($age){

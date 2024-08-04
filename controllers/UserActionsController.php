@@ -1,4 +1,4 @@
-<?php 
+<?php
 
     use Leaf\Flash;
     use PHPMailer\PHPMailer\PHPMailer;
@@ -11,7 +11,7 @@
         }
 
         public function registration(){
-            return $this->checkInputsRegistration() ? ViewHandler::render('login') : ViewHandler::render('registration',disciplines:$this->disciplinesModel->getAllDisciplines(), ages:$this->usersModel->getAllAgesRanges(), grades:$this->gradesModel->getAll());
+            return $this->checkInputsRegistration() ? ViewHandler::redirect('login') : ViewHandler::render('registration',disciplines:$this->disciplinesModel->getAllDisciplines(), ages:$this->usersModel->getAllAgesRanges(), grades:$this->gradesModel->getAll());
         }
 
         public function checkInputsRegistration(){
@@ -62,8 +62,11 @@
         }
 
         public function login(){
-            $this->checkInputsLogin();
-            ViewHandler::render('login');
+            if ($this->checkInputsLogin()) {
+                $this->mySpace();
+            }else{
+                ViewHandler::redirect('login');
+            }
         }
 
         public function checkInputsLogin(){
@@ -71,11 +74,23 @@
                 if (!empty($_POST['firstname']) && !empty($_POST['email']) && !empty($_POST['password'])) {
                     Validator::login($_POST);
                     if (!Validator::$errors) {
-                        Flash::set('user_connected', 1);
-                        Flash::set('user_connected_flash','Vous êtes connecté, bienvenue !');
-                        ViewHandler::render('monespace');
+                        if(!$this->usersModel->checkPasswordLogin($_POST['email'], $_POST['firstname'], $_POST['password'])){
+                            Flash::set('Une erreur est survenue lors de la connexion.','user_connect_error');
+                            return false;
+                        }else{
+                            $_SESSION['user_info'] = $this->usersModel->getStudentByEmailFirstname($_POST['email'], $_POST['firstname']);
+                            Flash::save('userLogged');
+                            Flash::set('Vous êtes connecté, bienvenue !', 'user_connect_success');
+                            return true;
+                        }
+                    }else{
+                        ViewHandler::render('login');
                     }
+                }else{
+                    ViewHandler::render('login');
                 }
+            }else{
+                ViewHandler::render('login');
             }
         }
 
@@ -146,7 +161,7 @@
                     Validator::reset_password($_POST);
                     if(!Validator::$errors){
                         if($user_info = $this->usersModel->getStudentByEmailFirstnameLastname(email:$_POST['email'],lastname:$_POST['name'],firstname:$_POST['firstname'])){
-                            $this->sendEmailPasswordChanging($user_info['student_email'], $user_info['student_id'], $user_info['student_token']) ? ViewHandler::render('login') : ViewHandler::render('forgot-password');
+                            $this->sendEmailPasswordChanging($user_info['student_email'], $user_info['student_id'], $user_info['student_token']) ? ViewHandler::redirect('login') : ViewHandler::render('forgot-password');
                         }else {
                             Flash::set('Nous rencontrons un problème avec vos identifiants, une ou plusieurs erreur.', 'change_password_error');
                             ViewHandler::render('forgot-password');
@@ -173,15 +188,34 @@
                         if (!Validator::$errors) {
                             if($this->usersModel->changePassword($_POST['password'], $_GET['token'])){
                                 Flash::set('Votre mot de passe à été changé avec succès.', 'change_password_success');
-                                ViewHandler::render('login','login');
+                                header("Location:./?q=login");
                             }else{
                                 ViewHandler::render('change-password');
                             }
+                        }else{
+                            ViewHandler::render('change-password');
                         }
+                    }else{
+                        ViewHandler::render('change-password');
                     }
-                    ViewHandler::render('change-password');
                 }
+            }else{
+                ViewHandler::render('home');
             }
+        }
+
+        public function mySpace(){
+            if (isset($_SESSION['budosport']['userLogged'])) {
+                ViewHandler::render('mon-espace');
+            }else{
+                ViewHandler::redirect('home');
+            }
+        }
+
+        public function disconnect(){
+            Flash::clearSaved();
+            Flash::set("Vous êtes déconnecté.","user_disconnect");
+            ViewHandler::redirect('home');
         }
 
     }

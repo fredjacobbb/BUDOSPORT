@@ -17,7 +17,7 @@ class Flash
     private static $config = [
         'key' => 'budosport',
         'default' => 'message',
-        'saved' => 'leaf.flashSaved',
+        'saved' => 'budosport.userLogged',
     ];
 
     /**

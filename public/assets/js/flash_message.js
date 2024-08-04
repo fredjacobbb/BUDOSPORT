@@ -7,5 +7,5 @@ if (message) {
     }, 4000);
     setTimeout(() => {
         message.remove();
-    }, 5000)
+    }, 6000)
 }

@@ -8,7 +8,6 @@
 
     require 'helpers/TokenGenerator.php';
     require 'helpers/Validator.php';
-    require 'helpers/Flash.php';
 
     require 'models/BaseModel.php';
     require 'models/ConnectDb.php';
@@ -41,8 +40,14 @@
             case 'change-password':
                 $userActionsController->changePassword();
                 break;
+            case 'mon-espace':
+                $userActionsController->mySpace();
+                break;
             case 'valid-account-mail':
                 $userActionsController->validAccountMail();
+                break;
+            case 'disconnect':
+                $userActionsController->disconnect();
                 break;
             case 'admin':
                 if (isset($_GET['action'])) {
