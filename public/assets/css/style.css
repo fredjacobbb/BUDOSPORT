@@ -10,6 +10,10 @@ a {
   text-decoration: none;
 }
 
+.fs-0 {
+  font-size: 3em !important;
+}
+
 header {
   text-align: center;
 }
@@ -38,7 +42,7 @@ header .header-logo {
 }
 
 nav {
-  scrollbar-color: #a41c27 silver;
+  scrollbar-color: silver #212529;
 }
 
 h1 {
@@ -78,6 +82,8 @@ nav ul li a:hover:not(active) {
 form {
   margin-top: 3em !important;
   max-width: 450px !important;
+  min-width: 90vw !important;
+  margin: auto;
   padding: 2em;
   padding-bottom: 0;
   margin-bottom: 3em;

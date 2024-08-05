@@ -62,6 +62,7 @@
                             $adminActionsController->deleteScheduleController();
                             break;
                         default:
+                            var_dump("error action");die;
                             break;
                     }
                 }

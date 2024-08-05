@@ -25,18 +25,18 @@ use Leaf\Flash;
         public function addSchedule(){
             if (!empty($_POST['day']) && !empty($_POST['start_at'] && !empty($_POST['end_at']) && !empty($_POST['discipline_id']) && !empty($_POST['age_id']))) {
                 if($this->schedulesModel->addSchedule($_POST['day'], $_POST['start_at'], $_POST['end_at'], $_POST['age_id'], $_POST['discipline_id'])){
-                    Flash::set('Le créneau a été inséré.');
+                    Flash::set('Le créneau a été inséré.', 'schedule_adding_success');
                     return true;
                 }else{
-                    Flash::set('Le créneau existe déja.');
+                    Flash::set('Le créneau existe déja.', 'schedule_adding_error');
                     return false;
                 }
             }
         }
 
         public function deleteSchedule(){
-            if (!empty($_GET['delete'])) {
-                if($this->schedulesModel->deleteSchedule($_GET['delete'])){
+            if (!empty($_GET['schedule-id'])) {
+                if($this->schedulesModel->deleteSchedule($_GET['schedule-id'])){
                     return true;
                 }else{
                     return false;

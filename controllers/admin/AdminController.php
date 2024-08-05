@@ -17,17 +17,18 @@
 
         public function deleteScheduleController(){
             if($this->schedulesController->deleteSchedule()){
-                Flash::set('Le créneau a été supprimé.', 'admin_schedule');
+                Flash::set('Le créneau a bien été supprimé.', 'schedule_success');
             }else{
-                Flash::set('Problème lors de la suppression.', 'admin_schedule');
+                Flash::set('Une erreur est survenue lors de la suppression du créneau.', 'schedule_error');
             }
+            $this->schedulesController();
         }
 
         public function addScheduleController(){
             if($this->schedulesController->addSchedule()){
-                Flash::set('Le créneau à bien été ajouté.', 'admin_schedule_success');
+                Flash::set('Le créneau à bien été ajouté.', 'schedule_success');
             }else{
-                Flash::set('Le créneau existe déja.', 'admin_schedule_error');
+                Flash::set('La plage du créneau est prise.', 'schedule_error');
             }
             $this->schedulesController();
         }
