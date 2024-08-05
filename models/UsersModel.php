@@ -13,7 +13,7 @@
         }
 
         public function getStudentByEmailFirstname($email,$firstname){
-            $sql = "SELECT * FROM `students` WHERE student_email = ? AND student_firstname = ?;";
+            $sql = "SELECT * FROM `students` AS `s` INNER JOIN `grades` AS `g` ON `g`.`grade_id` = `s`.`grade_id` WHERE `s`.`student_email` = ? AND `s`.`student_firstname` = ?;";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $email);
             $stmt->bindValue(2, $firstname);

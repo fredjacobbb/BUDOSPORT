@@ -55,9 +55,13 @@
                         case 'schedules':
                             $adminActionsController->schedulesController();
                             break;
-                        
+                        case 'add-schedule':
+                            $adminActionsController->addScheduleController();
+                            break;
+                        case 'delete-schedule':
+                            $adminActionsController->deleteScheduleController();
+                            break;
                         default:
-                            
                             break;
                     }
                 }
