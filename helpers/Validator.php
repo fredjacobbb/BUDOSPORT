@@ -36,14 +36,14 @@
                 foreach (self::$securesRulesRegistration as $key_rule => $rule) {
                     if ($key_post == $key_rule) {
                         if(gettype($post) !== $rule['type']){
-                            self::$errors[$key_post] = "La chaine $key_post n'est pas ok";
+                            self::$errors[$key_post] = "La chaine $key_post n'est pas au format attendu.";
                         }elseif (strlen($post) > $rule['max']) {
-                            self::$errors[$key_post] = "La chaine $key_post est trop longue";
+                            self::$errors[$key_post] = "La chaine $key_post est trop longue.";
                         }elseif (strlen($post) < $rule['min']) {
-                            self::$errors[$key_post] = "La chaine $key_post est trop courte";
+                            self::$errors[$key_post] = "La chaine $key_post est trop courte.";
                         }elseif (!empty($rule['regex'])){
                             if (!preg_match($rule['regex'], $post)) {
-                                self::$errors[$key_post] = "La chaine $key_post n'est pas attendue comme cela !";
+                                self::$errors[$key_post] = "La chaine $key_post n'est pas au format attendu regex.";
                             }
                         }elseif ($key_post === 'email') {
                             if(!filter_var($post, FILTER_VALIDATE_EMAIL)){

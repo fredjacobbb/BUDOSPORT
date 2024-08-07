@@ -32,26 +32,32 @@
     </div>
 <?php endif; ?>
 
-<form method="POST" class="bg-light mx-auto border border-2 rounded-2">
+<form method="POST" class="form-login bg-light mx-auto border border-2 rounded-2">
 
     <p class="fs-1 fw-semibold mb-5">Connexion</p>
 
     <label for="email" class="form-label">Email</label>
-    <input name="email" type="email" placeholder="frdjacobbb@gmail.ze" class="form-control mb-2 fw-light" id="email" value="ok@ok.fr">
+    <input name="email" type="email" placeholder="frdjacobbb@gmail.ze" class="form-control mb-2 fw-light" id="email" value="ok@ok.fr" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['email']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['email'] ?? '' ?></p>
-
+    
     <label for="firstname" class="form-label">Prénom</label>
-    <input type="text" name="firstname" placeholder="fred" value="okok" class="form-control mb-2 fw-light" id="firstname">
+    <input type="text" name="firstname" placeholder="fred" value="okok" class="form-control mb-2 fw-light" id="firstname" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['firstname']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['firstname'] ?? '' ?></p>
+    <div>
+        <p class="fw-lighter error-message-firstname text-danger fs-6 my-2"></p>
+    </div>
 
     <label for="password" class="form-label">Mot de passe</label>
-    <input type="password" name="password" value="aozfjjafFAZ//!!CA888" class="form-control fw-light" id="password">
+    <input type="password" name="password" value="aozfjjafFAZ//!!CA888" class="form-control fw-light" id="password" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password'] ?? '' ?></p>
+    <div>
+        <p class="fw-lighter error-message-password text-danger fs-6 my-2"></p>
+    </div>
 
     <a href="./?q=forgot-password" class="d-inline-block my-4 text-dark fw-light text-underline-dark">Mot de passe oublié ?</a>
 
     <div class="text-center m-4">
-        <button class="btn btn-red text-light" type="submit">Se connecter</button>
+        <button class="btn btn-red text-light btn-registration" type="submit">Se connecter</button>
     </div>
 
 </form>

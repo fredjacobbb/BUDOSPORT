@@ -13,32 +13,13 @@
         }
 
         public function getSchedulesByAgeAndDiscipline($age_id,$discipline_id){
-            $sql = "SELECT * FROM `schedules` WHERE `age_id` = ? AND `discipline_id` = ?";
+            $sql = "SELECT * FROM `schedules` WHERE `age_id` = ? AND `discipline_id` = ? ORDER BY FIELD(day, '1', '2', '3', '4', '5', '6');";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1,$age_id, PDO::PARAM_INT);
             $stmt->bindValue(2,$discipline_id, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
-
-        // public function addSchedule($day,$start_at,$end_at,$age_id,$discipline_id){
-        //     $sql = 'INSERT INTO schedules (day,start_at,end_at,age_id,discipline_id) SELECT ?,?,?,?,? WHERE NOT EXISTS (SELECT * FROM schedules WHERE day = ? AND );';
-        //     $stmt = $this->db->prepare($sql);
-        //     $stmt->bindValue(1, $day);
-        //     $stmt->bindValue(2,$start_at);
-        //     $stmt->bindValue(3,$end_at);
-        //     $stmt->bindValue(4, $age_id);
-        //     $stmt->bindValue(5, $discipline_id);
-        //     $stmt->bindValue(6, $day);
-        //     $stmt->bindValue(7, $start_at);
-        //     $stmt->bindValue(8, $end_at);
-        //     $stmt->execute();
-        //     if ($stmt->rowCount() > 0) {
-        //         return true;
-        //     }else{
-        //         return false;
-        //     }
-        // }
 
         public function addSchedule($day, $start_at, $end_at, $age_id, $discipline_id) {
             $sql = 'INSERT INTO schedules (day, start_at, end_at, age_id, discipline_id) 

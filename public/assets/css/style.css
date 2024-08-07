@@ -79,10 +79,10 @@ nav ul li a:hover:not(active) {
   color: black;
 }
 
-form {
+.form-login {
+  max-width: 450px !important;
   margin-top: 3em !important;
   max-width: 450px !important;
-  min-width: 90vw !important;
   margin: auto;
   padding: 2em;
   padding-bottom: 0;
@@ -123,12 +123,27 @@ p {
   margin: 0;
 }
 
+.container-disciplines {
+  margin-top: 3em;
+  justify-content: flex-start;
+}
+.container-disciplines div:first-child {
+  background-color: rgb(115, 111, 111);
+}
+.container-disciplines div:last-child {
+  background-color: #a41c27;
+}
+
 @media (width > 700px) {
   header {
     text-align: start !important;
   }
   header .header-logo {
     min-width: 380px;
+  }
+  .form-login {
+    margin-top: 3em !important;
+    max-width: 450px !important;
   }
 }
 

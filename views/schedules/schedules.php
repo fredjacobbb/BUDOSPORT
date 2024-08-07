@@ -17,7 +17,7 @@
     </div>
 <?php endif; ?>
 
-<h3 class="text-light fs-0 mt-5 mb-0 text-center text-dark fw-bolder py-2 bg-light py-3">Créneaux <i class="fa-solid fa-clock"></i></h3>
+<h3 class="text-light fs-0 mt-5 mb-0 text-center text-dark fw-bolder py-2 bg-light py-3">Gérer les horaires</h3>
 
 <div class="overflow-x-scroll">
     <div class="d-flex">
@@ -40,7 +40,7 @@
                     <div class="d-flex fs-6">
                         <input name="start_at" type="time">
                         <input name="end_at" type="time">
-                        <button class="btn btn-secondary fs-6" type="submit">Ajouter</button>
+                        <button class="btn btn-success fs-6 ms-3" type="submit">Ajouter</button>
                     </div>
                 </form>
                 <div class="d-flex flex-wrap">

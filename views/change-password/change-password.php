@@ -16,19 +16,21 @@
     </div>
 <?php endif; ?>
 
-<form method="POST" class="bg-light mx-auto border border-2 rounded-2">
+<form method="POST" class="form-login bg-light mx-auto border border-2 rounded-2">
 
     <p class="fs-1 fw-semibold mb-5">Nouveau mot de passe</p>
 
     <label for="password" class="form-label">Mot de passe</label>
-    <input type="password" name="password" class="form-control fw-light" id="password">
+    <input type="password" name="password" class="form-control fw-light" id="password" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password'] ?? '' ?></p>
+    <div class="error-message-password fw-lighter text-danger fs-6 my-2"></div>
+
 
     <label for="password" class="form-label">Nouvelle saisie</label>
-    <input type="password" name="password-retyped" class="form-control fw-light" id="password">
+    <input type="password" name="password-retyped" class="form-control fw-light" id="password" required>
 
     <div class="text-center m-4">
-        <button class="btn btn-red text-light" type="submit">Valider</button>
+        <button class="btn btn-registration btn-red text-light" type="submit">Valider</button>
     </div>
 
 </form>

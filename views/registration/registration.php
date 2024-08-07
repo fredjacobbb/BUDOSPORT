@@ -23,7 +23,7 @@
     </div>
 <?php endif; ?>
 
-<form method="POST" class="bg-light mx-auto border border-2 rounded-2">
+<form method="POST" class="form-login bg-light mx-auto border border-2 rounded-2">
 
     <p class="fs-1 fw-semibold">Inscription</p>
 
@@ -33,31 +33,38 @@
     </div>
 
     <label class="form-label mt-1" for="name">Nom</label>
-    <input type="text" name="name" value="okok" class="form-control fw-light" id="name">
+    <input type="text" name="name" value="okok" class="form-control fw-light" id="name" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['name']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['name'] ?? '' ?></p>
+    <div>
+        <p class="fw-lighter link-offset-2 link-underline link-underline-opacity-50 error-message-name text-danger fs-6 my-2"></p>
+    </div>
 
     <label class="form-label mt-1" for="firstname">Prénom</label>
-    <input type="text" name="firstname" value="okok" class="form-control fw-light" id="firstname">
+    <input type="text" name="firstname" value="okok" class="form-control fw-light" id="firstname" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['firstname']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['firstname'] ?? '' ?></p>
+    <div class="error-message-firstname text-danger fs-6 my-2"></div>
 
     <label class="form-label mt-1" for="email">Email</label>
-    <input type="email" name="email" value="ok@ok.fr" class="form-control fw-light" id="email">
-    <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['email']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['name'] ?? '' ?></p>
+    <input type="email" name="email" value="ok@ok.fr" class="form-control fw-light" id="email" required>
+    <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['email']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['email'] ?? '' ?></p>
 
     <label class="form-label mt-1" for="password">Mot de passe</label>
-    <input type="password" name="password" value="Azerty789////" class="form-control fw-light" id="password">
+    <input type="password" name="password" value="Azerty789////" class="form-control fw-light" id="password" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password'] ?? '' ?></p>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password-retyped']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password-retyped'] ?? '' ?></p>
+    <div class="error-message-password text-danger fs-6 my-2"></div>
 
 
     <label class="form-label mt-1" for="password">Re-mot de passe</label>
-    <input type="password" name="password-retyped" value="Azerty789////" class="form-control fw-light" id="password">
+    <input type="password" name="password-retyped" value="Azerty789////" class="form-control fw-light" id="password" required>
 
     <label class="form-label mt-1" for="birthdate">Date de naissance</label>
-    <input class="form-control fw-light" name="birthdate" value="2000-08-05" type="date">
+    <input class="form-control fw-light" name="birthdate" value="2000-08-05" type="date" required>
+    <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['birthdate']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['birthdate'] ?? '' ?></p>
+
 
     <label class="form-label mt-1" for="discipline">Discipline</label>
-    <select name="discipline" class="form-select fw-light" id="discipline">
+    <select name="discipline" class="form-select fw-light" id="discipline" required>
         <? foreach($disciplines as $discipline): ?>
             <option value="<?= $discipline->discipline_id ?>"><?= ucfirst($discipline->discipline_name) ?></option>
         <? endforeach ?>
@@ -73,7 +80,7 @@
     <p class="<?= !empty(Validator::$errors['grade']) ? 'text-danger' : 'd-none' ?>"><?= Validator::$errors['grade'] ?? '' ?></p>
 
     <div class="text-center m-4">
-        <button class="btn btn-red text-light" type="submit">S'inscrire</button>
+        <button class="btn btn-red text-light btn-registration" type="submit">S'inscrire</button>
     </div>
 
 </form>

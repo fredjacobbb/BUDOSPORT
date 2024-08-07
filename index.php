@@ -28,6 +28,9 @@
 
     if (isset($_GET['q'])) {
         switch ($_GET['q']) {
+            case 'disciplines':
+                $userActionsController->listDisciplines();
+                break;
             case 'registration':
                 $userActionsController->registration();
                 break;

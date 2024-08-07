@@ -38,6 +38,8 @@
                                     Flash::set("Un email de validation vous a été envoyé, cliquez sur le lien pour activer le compte.", "registration_success");
                                     return true;
                                 }
+                            }else{
+                                var_dump('psa date');die;
                             }
                         }else{
                             // a changer de place
@@ -189,6 +191,7 @@
                             if($this->usersModel->changePassword($_POST['password'], $_GET['token'])){
                                 Flash::set('Votre mot de passe à été changé avec succès.', 'change_password_success');
                                 header("Location:./?q=login");
+                                exit;
                             }else{
                                 ViewHandler::render('change-password');
                             }
@@ -202,6 +205,10 @@
             }else{
                 ViewHandler::render('home');
             }
+        }
+
+        public function listDisciplines(){
+            ViewHandler::render('disciplines', disciplines:$this->disciplinesModel->getAllDisciplines());
         }
 
         public function mySpace(){

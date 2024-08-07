@@ -83,8 +83,6 @@
             $stmt->execute();
             if($student = $stmt->fetch()){
                 return $student['student_password'];
-            }else{
-                var_dump("no ok");die;
             }
         }
 
