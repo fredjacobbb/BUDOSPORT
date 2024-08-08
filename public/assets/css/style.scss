@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Tac+One&display=swap');
 
+@font-face {
+    font-family: gotham;
+    src: url("../fonts/gotham/gotham.otf") format("opentype");
+}
+
 $red : #a41c27;
 
 body {
@@ -9,11 +14,19 @@ body {
     padding: 0;
 }
 
+h2 {
+    font-family: gotham !important;
+}
+
 a {
     text-decoration: none;
 }
 
 .fs-0{
+    font-size: 2em !important;
+}
+
+.fs--1 {
     font-size: 3em !important;
 }
 
@@ -82,6 +95,29 @@ nav ul {
     }
 }
 
+.banner-budo {
+    .offer-description {
+        font-family: gotham !important;
+        transform: translateY(-50%);
+    }
+}
+
+.banner-budo-home-bg {
+    background-image: url('../img/cover-home.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: 90%;
+    background-position-y: 10%;
+    height: 60vh;
+    filter: grayscale(90%);    
+    div {
+        h4{
+            filter: grayscale(0%) !important;
+            background-color: $red !important;
+        }
+    }
+}
+
 
 .form-login {
     max-width: 450px !important;
@@ -91,6 +127,9 @@ nav ul {
     padding: 2em;
     padding-bottom: 0;
     margin-bottom: 3em;
+    h2 {
+        font-family: gotham !important;
+    }
 }
 
 .active {
@@ -133,18 +172,31 @@ p {
 
 .container-disciplines {
     margin-top: 3em;
-    justify-content: flex-start;
-    div {
-        &:first-child{
-            background-color: rgb(115, 111, 111);
+    .container-discipline {
+        h3 {
+            // background-color: rgb(28, 27, 27);
         }
-        &:last-child{
-            background-color: $red;
+        &:nth-child(odd){
+            h3{
+                // background-color: white;
+                color: #212529;
+            }
+            h4 , p {
+                color: #212529;
+            }
+            background-color: rgb(169, 166, 166);
         }
     }
 }
 
 @media (width > 700px) {
+    .fs-0{
+        font-size: 3em !important;
+    }
+    
+    .fs--1 {
+        font-size: 5em !important;
+    }
     header{
         text-align: start !important;
         .header-logo{

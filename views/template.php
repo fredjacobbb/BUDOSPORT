@@ -16,7 +16,7 @@
 
     <nav class="overflow-x-scroll">
         <ul>
-            <li class="fs-6"><a href="/"><i class="fas fa-home me-3"></i>Accueil</a></li>
+            <li class="fs-6"><a class="active" href="/"><i class="fas fa-home me-3"></i>Accueil</a></li>
             <li class="fs-6"><a href="/?q=schedules"><i class="fas fa-clock me-3"></i>Les horaires</a></li>
             <li class="fs-6"><a href="./?q=disciplines"><i class="fas fa-user-ninja me-3"></i>Les disciplines</a></li>
             <li class="fs-6 <?= !empty($_SESSION['budosport']['userLogged']) ? 'd-none' : '' ?>"><a href="./?q=login"><i class="fas fa-sign-in-alt me-3"></i>Se connecter</a></li>

@@ -18,7 +18,7 @@
 
 <form method="POST" class="form-login bg-light mx-auto border border-2 rounded-2">
 
-    <p class="fs-1 fw-semibold mb-5">Nouveau mot de passe</p>
+    <h2 class="fs-1 fw-semibold mb-5">Nouveau mot de passe</h2>
 
     <label for="password" class="form-label">Mot de passe</label>
     <input type="password" name="password" class="form-control fw-light" id="password" required>

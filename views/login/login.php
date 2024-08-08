@@ -34,7 +34,7 @@
 
 <form method="POST" class="form-login bg-light mx-auto border border-2 rounded-2">
 
-    <p class="fs-1 fw-semibold mb-5">Connexion</p>
+    <h2 class="fs-1 fw-semibold mb-5">Connexion</h2>
 
     <label for="email" class="form-label">Email</label>
     <input name="email" type="email" placeholder="frdjacobbb@gmail.ze" class="form-control mb-2 fw-light" id="email" value="ok@ok.fr" required>

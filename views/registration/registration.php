@@ -25,7 +25,7 @@
 
 <form method="POST" class="form-login bg-light mx-auto border border-2 rounded-2">
 
-    <p class="fs-1 fw-semibold">Inscription</p>
+    <h2 class="fs-1 fw-semibold">Inscription</h2>
 
     <div class="d-flex justify-content-around flex-wrap flex-sm-nowrap align-items-center my-4">
         <p class="fw-lighter fs-6 m-0">Vous possédez un compte ? </p>
@@ -53,6 +53,7 @@
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password'] ?? '' ?></p>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password-retyped']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password-retyped'] ?? '' ?></p>
     <div class="error-message-password text-danger fs-6 my-2"></div>
+    <div class="info-password d-none"></div>
 
 
     <label class="form-label mt-1" for="password">Re-mot de passe</label>

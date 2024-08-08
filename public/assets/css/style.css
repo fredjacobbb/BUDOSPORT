@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Tac+One&display=swap");
+@font-face {
+  font-family: gotham;
+  src: url("../fonts/gotham/gotham.otf") format("opentype");
+}
 body {
   width: 100%;
   height: 100%;
@@ -6,11 +10,19 @@ body {
   padding: 0;
 }
 
+h2 {
+  font-family: gotham !important;
+}
+
 a {
   text-decoration: none;
 }
 
 .fs-0 {
+  font-size: 2em !important;
+}
+
+.fs--1 {
   font-size: 3em !important;
 }
 
@@ -79,6 +91,25 @@ nav ul li a:hover:not(active) {
   color: black;
 }
 
+.banner-budo .offer-description {
+  font-family: gotham !important;
+  transform: translateY(-50%);
+}
+
+.banner-budo-home-bg {
+  background-image: url("../img/cover-home.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: 90%;
+  background-position-y: 10%;
+  height: 60vh;
+  filter: grayscale(90%);
+}
+.banner-budo-home-bg div h4 {
+  filter: grayscale(0%) !important;
+  background-color: #a41c27 !important;
+}
+
 .form-login {
   max-width: 450px !important;
   margin-top: 3em !important;
@@ -87,6 +118,9 @@ nav ul li a:hover:not(active) {
   padding: 2em;
   padding-bottom: 0;
   margin-bottom: 3em;
+}
+.form-login h2 {
+  font-family: gotham !important;
 }
 
 .active {
@@ -125,16 +159,24 @@ p {
 
 .container-disciplines {
   margin-top: 3em;
-  justify-content: flex-start;
 }
-.container-disciplines div:first-child {
-  background-color: rgb(115, 111, 111);
+.container-disciplines .container-discipline:nth-child(odd) {
+  background-color: rgb(169, 166, 166);
 }
-.container-disciplines div:last-child {
-  background-color: #a41c27;
+.container-disciplines .container-discipline:nth-child(odd) h3 {
+  color: #212529;
+}
+.container-disciplines .container-discipline:nth-child(odd) h4, .container-disciplines .container-discipline:nth-child(odd) p {
+  color: #212529;
 }
 
 @media (width > 700px) {
+  .fs-0 {
+    font-size: 3em !important;
+  }
+  .fs--1 {
+    font-size: 5em !important;
+  }
   header {
     text-align: start !important;
   }

@@ -69,6 +69,20 @@ FormValidation = {
             document.getElementsByClassName(msg_error)[0].innerText = `${err.message}`
             document.getElementsByClassName('btn-registration')[0].setAttribute('disabled', 'true');
         }
+    },
+
+    showPasswordPrerequies(){
+        FormValidation.passwordInput.addEventListener('focus', () => {
+            let infoPassword = document.getElementsByClassName('info-password')[0];
+
+            if (infoPassword.classList.contains('d-none')) {
+                console.log('d-none');
+                
+            }else{
+                console.log('okok');
+                
+            }
+        })
     }
     
 }
@@ -86,6 +100,8 @@ if (FormValidation.firstnameInput) {
 }
 
 if (FormValidation.passwordInput) {
+    //call function 
+    FormValidation.showPasswordPrerequies();
     FormValidation.passwordInput.addEventListener('keyup', () => {
         FormValidation.domHandler(FormValidation.rulePasswordInput, FormValidation.passwordInput, 'error-message-password');    
     })
