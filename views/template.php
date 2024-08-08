@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/assets/css/style.css">
     <link rel="stylesheet" href="node_modules/fontawesome-free/css/all.min.css">
+    <script src="node_modules/gsap/dist/all.js"></script>
 </head>
 <body class="bg-dark">
 
@@ -14,7 +15,7 @@
         <img class="img header-logo" src="public/assets/img/header_logo.webp" alt="brand_icon">
     </header>
 
-    <nav class="overflow-x-scroll">
+    <nav class="overflow-x-scroll sticky-top bg-dark">
         <ul>
             <li class="fs-6"><a class="active" href="/"><i class="fas fa-home me-3"></i>Accueil</a></li>
             <li class="fs-6"><a href="/?q=schedules"><i class="fas fa-clock me-3"></i>Les horaires</a></li>
@@ -29,9 +30,9 @@
 
     <?= $view ?>
 
-    <footer class="container-fluid bg-red text-light pt-5 pb-2 mt-5">
-        <div class="row align-items-center justify-content-center justify-content-sm-around my-5">
-            <div class="col-md-4 col-12 mb-4 text-center text-sm-start">
+    <footer class="container-fluid bg-red text-light pt-5 pb-2">
+        <div class="row align-items-center justify-content-center justify-content-md-between mx-sm-5 my-5">
+            <div class="col-md-4 col-12 mb-4 text-center text-md-start">
                 <p class="fs-2"><strong>BUDOSPORT 80</strong></p>
                 <p>14 rue colbert 80480 AMIENS</p>
                 <p><a href="tel:+0612121212" class="text-light text-decoration-none">Tél : 0612121212</a></p>
@@ -58,5 +59,6 @@
 
     <script src="public/assets/js/AnimationsEffects.js"></script>
     <script src="public/assets/js/validator/form-validation.js"></script>
+    <script type="module" src="public/assets/js/scrollEffect.js"></script>
 </body>
 </html>

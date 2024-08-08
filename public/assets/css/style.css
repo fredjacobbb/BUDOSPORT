@@ -10,6 +10,10 @@ body {
   padding: 0;
 }
 
+.vh-25 {
+  height: 25vh !important;
+}
+
 h2 {
   font-family: gotham !important;
 }
@@ -72,8 +76,7 @@ nav ul {
   justify-content: start;
   list-style: none;
   padding: 0;
-  margin-top: 2.8em;
-  margin-bottom: 1.5em;
+  margin: 1.2em 0;
 }
 nav ul li {
   text-align: center;
@@ -94,6 +97,12 @@ nav ul li a:hover:not(active) {
 .banner-budo .offer-description {
   font-family: gotham !important;
   transform: translateY(-50%);
+  backdrop-filter: blur(5px);
+}
+.banner-budo .offer-description p {
+  letter-spacing: -4px !important;
+  font-weight: 900 !important;
+  text-decoration-color: #a41c27 !important;
 }
 
 .banner-budo-home-bg {
@@ -102,7 +111,7 @@ nav ul li a:hover:not(active) {
   background-repeat: no-repeat;
   background-position-x: 90%;
   background-position-y: 10%;
-  height: 60vh;
+  height: 80vh;
   filter: grayscale(90%);
 }
 .banner-budo-home-bg div h4 {
@@ -170,18 +179,70 @@ p {
   color: #212529;
 }
 
-@media (width > 700px) {
+.section-presentation {
+  height: 80vh;
+}
+.section-presentation .section-presentation-first {
+  background-color: #a41c27;
+  height: 20%;
+}
+.section-presentation .section-presentation-first h2 {
+  display: inline-block;
+  font-size: 3em;
+}
+.section-presentation .section-presentation-second {
+  margin-top: 3em;
+}
+.section-presentation .section-presentation-second img {
+  width: 40%;
+  max-width: 170px;
+  border-radius: 100%;
+  border: 8px solid #a41c27;
+  margin-bottom: 2em;
+}
+.section-presentation .section-presentation-second h2 {
+  font-size: large;
+}
+.section-presentation .section-presentation-second p {
+  font-size: small;
+}
+
+@media (width > 900px) {
   .fs-0 {
     font-size: 3em !important;
   }
   .fs--1 {
-    font-size: 5em !important;
+    font-size: 6em !important;
+  }
+  .title-section {
+    font-size: 4em !important;
   }
   header {
     text-align: start !important;
   }
   header .header-logo {
     min-width: 380px;
+  }
+  .section-presentation {
+    height: 70vh;
+  }
+  .section-presentation .section-presentation-first {
+    display: flex;
+    align-items: center;
+    height: 60%;
+    text-align: center;
+    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+  }
+  .section-presentation .section-presentation-first h2 {
+    text-align: center;
+    font-size: xx-large;
+  }
+  .section-presentation .section-presentation-second {
+    margin-top: 0em;
+  }
+  .section-presentation .section-presentation-second div {
+    align-content: space-between !important;
+    align-items: space-between !important;
   }
   .form-login {
     margin-top: 3em !important;

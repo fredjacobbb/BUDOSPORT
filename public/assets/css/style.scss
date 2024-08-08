@@ -14,6 +14,12 @@ body {
     padding: 0;
 }
 
+
+
+.vh-25{
+    height: 25vh !important;
+}
+
 h2 {
     font-family: gotham !important;
 }
@@ -76,8 +82,7 @@ nav ul {
     justify-content: start;
     list-style: none;
     padding: 0;
-    margin-top: 2.8em;
-    margin-bottom: 1.5em;
+    margin: 1.2em 0;
     li {
         text-align: center;
         a {
@@ -99,6 +104,12 @@ nav ul {
     .offer-description {
         font-family: gotham !important;
         transform: translateY(-50%);
+        backdrop-filter: blur(5px);
+        p {
+            letter-spacing: -4px !important;
+            font-weight: 900 !important;
+            text-decoration-color: $red !important;
+        }
     }
 }
 
@@ -108,7 +119,7 @@ nav ul {
     background-repeat: no-repeat;
     background-position-x: 90%;
     background-position-y: 10%;
-    height: 60vh;
+    height: 80vh;
     filter: grayscale(90%);    
     div {
         h4{
@@ -189,13 +200,47 @@ p {
     }
 }
 
-@media (width > 700px) {
-    .fs-0{
+
+.section-presentation {
+    height: 80vh;
+    .section-presentation-first {
+        background-color: $red;
+        height: 20%;
+        h2 {
+            display: inline-block;
+            font-size: 3em;
+        }
+    }
+    .section-presentation-second {
+        margin-top: 3em;
+        img {
+            width: 40%;
+            max-width: 170px;
+            border-radius: 100%;
+            border: 8px solid $red;
+            margin-bottom: 2em;
+        }
+        h2 {
+            font-size: large;
+        }
+        p {
+            font-size:small;
+        }
+    }
+}
+
+
+
+
+@media (width > 900px) {
+    .fs-0 {
         font-size: 3em !important;
     }
-    
     .fs--1 {
-        font-size: 5em !important;
+        font-size: 6em !important;
+    }
+    .title-section {
+        font-size: 4em !important;
     }
     header{
         text-align: start !important;
@@ -203,6 +248,29 @@ p {
             min-width: 380px;
         }
     }
+    .section-presentation {
+        height: 70vh;
+        .section-presentation-first {
+            
+            display: flex;
+            align-items: center;
+            height: 60%;
+            text-align: center;
+            clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+            h2 {
+                text-align: center;
+                font-size: xx-large;
+            }
+        }
+        .section-presentation-second {
+            margin-top: 0em;
+            div {
+                align-content: space-between !important;
+                align-items : space-between !important;
+            }
+        }
+    }
+
     .form-login {
         margin-top: 3em !important;
         max-width: 450px !important;
