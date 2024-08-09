@@ -251,7 +251,7 @@ p {
     .section-presentation {
         height: 70vh;
         .section-presentation-first {
-            
+
             display: flex;
             align-items: center;
             height: 60%;
@@ -268,8 +268,13 @@ p {
                 align-content: space-between !important;
                 align-items : space-between !important;
             }
+            h2 {
+                line-height: 3em;
+            }
         }
     }
+
+    .sectio
 
     .form-login {
         margin-top: 3em !important;

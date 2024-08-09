@@ -22,7 +22,7 @@
 
 <div class="section-presentation d-flex flex-wrap align-items-center align-content-center">
     <div class="section-presentation-first title-block d-flex align-items-center col-12 col-md-6">
-        <h2 class="text-light title-section">LE SENSEI</h2>
+        <h2 class="text-light title-section ps-5">LE SENSEI</h2>
     </div>
     <div class="section-presentation-second d-flex align-items-center col-12 col-md-6">
         <div class="text-center p-3">
@@ -33,8 +33,8 @@
     </div>
 </div>
 
-<div>
-    
+<div class="section-">
+
 </div>
 
 <?php $view = ob_get_clean() ?>
