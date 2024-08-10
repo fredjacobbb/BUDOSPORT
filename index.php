@@ -24,6 +24,7 @@
 
     // $adminController = new AdminController();
     $userActionsController = new UserActionsController(new DisciplinesModel(), new UsersModel(), new GradesModel());
+    $disciplinesModel = new DisciplinesModel();
     $adminActionsController = new AdminController(new SchedulesController(new SchedulesModel(), new DisciplinesModel(), new UsersModel()));
 
     if (isset($_GET['q'])) {
@@ -55,6 +56,9 @@
             case 'admin':
                 if (isset($_GET['action'])) {
                     switch ($_GET['action']) {
+                        case 'students':
+                            $adminActionsController->listStudentsController();
+                            break;
                         case 'schedules':
                             $adminActionsController->schedulesController();
                             break;
@@ -71,10 +75,12 @@
                 }
                 break;
             default:
-                ViewHandler::render('home');
+                $disciplines = $disciplinesModel->getAllDisciplines();
+                ViewHandler::render('home', disciplines: $disciplines);
                 break;
         }
     }else{
-        ViewHandler::render('home');
+        $disciplines = $disciplinesModel->getAllDisciplines();
+        ViewHandler::render('home', disciplines:$disciplines);
     }
 

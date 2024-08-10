@@ -17,9 +17,9 @@
     </div>
 <?php endif; ?>
 
-<h3 class="text-light fs-0 mt-5 mb-0 text-center text-dark fw-bolder py-2 bg-light py-3">Gérer les horaires</h3>
+<!-- <h3 class="text-light fs-0 mt-5 mb-0 text-center text-dark fw-bolder py-2 bg-light py-3">Gérer les horaires</h3> -->
 
-<div class="overflow-x-scroll">
+<div class="overflow-x-scroll my-5">
     <div class="d-flex">
         <?php foreach($schedules->ages as $key => $schedule): ?>
             <div class="minw-100 bg-light p-0 m-0">

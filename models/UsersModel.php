@@ -7,9 +7,9 @@
         }
 
         public function getAllStudents(){
-            $sql = "SELECT `student_firstname`,`student_name` FROM `students`";
+            $sql = "SELECT * FROM `students`";
             $stmt = $this->db->query($sql);
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
         public function getStudentByEmailFirstname($email,$firstname){
@@ -103,6 +103,15 @@
             }else{
                 return false;
             }
+        }
+
+        public function getStudentsByDisciplineAndAgeId($discipline_id, $age_id){
+            $sql = "SELECT * FROM students WHERE discipline_id = ? AND age_id = ?;";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, $discipline_id);
+            $stmt->bindValue(2, $age_id);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
         public function getAgeRangeId($age){

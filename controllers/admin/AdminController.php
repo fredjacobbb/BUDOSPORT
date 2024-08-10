@@ -4,14 +4,16 @@
 
     class AdminController {
 
-        public function __construct(protected $schedulesController = new SchedulesController(new SchedulesModel(), new DisciplinesModel(), new UsersModel()), protected $disciplines = new DisciplinesModel()){
+        public function __construct(protected $schedulesController = new SchedulesController(new SchedulesModel(), new DisciplinesModel(), new UsersModel()), protected $disciplines = new DisciplinesModel(), protected $users = new UsersModel()){
             
         }
 
+        protected $students;
+
         public function schedulesController(){
             $schedules = $this->schedulesController->listSchedules();
-            $disciplines = $this->disciplines->getAllDisciplines();
-            ViewHandler::render("schedules", schedules:$schedules, disciplines:$disciplines);
+            // $disciplines = $this->disciplines->getAllDisciplines();
+            ViewHandler::render("schedules", schedules:$schedules);
             
         }
 
@@ -31,6 +33,18 @@
                 Flash::set('La plage du créneau est prise.', 'schedule_error');
             }
             $this->schedulesController();
+        }
+
+        public function listStudentsController(){
+            $this->students = new stdClass();
+            $this->students->ages = $this->users->getAllAgesRanges();
+            foreach ($this->students->ages as $key => $ages) {
+                $this->students->ages[$key]->disciplines = $this->disciplines->getAllDisciplines();
+                foreach ($this->students->ages[$key]->disciplines as $key_discipline => $discipline) {
+                    $this->students->ages[$key]->disciplines[$key_discipline]->students = $this->users->getStudentsByDisciplineAndAgeId($this->students->ages[$key]->disciplines[$key_discipline]->discipline_id,$this->students->ages[$key]->age_id);
+                }
+            }
+            ViewHandler::render('students', students: $this->students);            
         }
 
 

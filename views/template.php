@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="public/assets/css/style.css">
     <link rel="stylesheet" href="node_modules/fontawesome-free/css/all.min.css">
     <script src="node_modules/gsap/dist/all.js"></script>
+    <script src="node_modules/typewriter-effect/dist/core.js"></script>
 </head>
 <body class="bg-dark">
 
@@ -15,7 +16,7 @@
         <img class="img header-logo" src="public/assets/img/header_logo.webp" alt="brand_icon">
     </header>
 
-    <nav class="overflow-x-scroll sticky-top bg-dark">
+    <nav class="sticky-top bg-dark">
         <ul>
             <li class="fs-6"><a class="active" href="/"><i class="fas fa-home me-3"></i>Accueil</a></li>
             <li class="fs-6"><a href="/?q=schedules"><i class="fas fa-clock me-3"></i>Les horaires</a></li>
@@ -60,5 +61,8 @@
     <script src="public/assets/js/AnimationsEffects.js"></script>
     <script src="public/assets/js/validator/form-validation.js"></script>
     <script type="module" src="public/assets/js/scrollEffect.js"></script>
+    <script type="module" src="public/assets/js/TextAnimations.js"></script>
+    <script type="module" src="public/assets/js/homeAnimations.js"></script>
+
 </body>
 </html>

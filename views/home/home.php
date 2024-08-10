@@ -12,23 +12,46 @@
     <div class="banner-budo-home-bg">
     </div>
     <div class="top-50 position-absolute offer-description text-center">
-        <h3 class="fs-0 text-light m-0">Deux séances</h3>
+        <div class="d-flex justify-content-center align-items-center">
+            <b class="fs-0 text-red m-3">Deux</b>
+            <h3 class="fs-0 text-light m-0">séances</h3>
+        </div>
         <p class="fs--1 text-light fw-bolder text-decoration-underline link-offset-3">OFFERTES</p>
-    </div>
-    <div class="block-bottom-banner col-10 col-md-5 text-start bg-red position-absolute bottom-0 p-4 py-2">
-        <h4 class="text-light fw-lighter fs-6 m-0">Club dirigé par Frédéric Bourgouin 7e DAN</h4>
     </div>
 </div>
 
-<div class="section-presentation d-flex flex-wrap align-items-center align-content-center">
-    <div class="section-presentation-first title-block d-flex align-items-center col-12 col-md-6">
-        <h2 class="text-light title-section ps-5">LE SENSEI</h2>
+<div class="section-for-subscriber-home justify-content-center d-flex flex-wrap align-content-center align-items-center">
+    <p class="text-light p-4 text-animation fs-2 fw-light"></p>
+    <div class="mx-auto w-100 text-center">
+        <button class="btn btn-light fw-bolder fs-5 text-red">Nous rejoindre</button>
     </div>
-    <div class="section-presentation-second d-flex align-items-center col-12 col-md-6">
+</div>
+
+<!-- <div class="section-disciplines">
+    <div class="d-flex justify-content-center align-content-center align-items-center my-5">
+        <h2 class="text-red"><?= count($disciplines) ?></h2>
+        <b class="text-light fs-0"> DISCIPLINES </b>
+    </div>
+    <div class="d-flex flex-wrap justify-content-start justify-content-center align-content-center mb-5 h-100">
+        <?php foreach($disciplines as $key => $d): ?>
+            <div class="discipline-card d-none card-<?= $key ?>">
+                <p class="w-100 h-100 fs-1 fw-bold"><?= ucfirst($d->discipline_name) ?></p>
+            </div>
+        <?php endforeach ?>
+    </div>
+</div> -->
+
+<div class="section-presentation d-flex flex-wrap align-items-center align-content-center">
+    <div class="container-one title-block d-flex align-items-center col-12 col-md-6">
+        <h2 class="text-light title-section ps-5 py-3">UN MAÎTRE</h2>
+    </div>
+    <div class="container-two d-flex align-items-center justify-content-center mx-auto col-12 col-md-6">
         <div class="text-center p-3">
-            <img src="public/assets/img/pp-fred.png" alt="">
-            <h2 class="text-light fs-2">Frédéric Bourgouin 7ème DAN ,</h2>
-            <p class="text-light w-75 mx-auto fs-6">à commencé le judo, le ju-jitsu à l'âge de 5 ans et s'adonne depuis plus de 30 ans à partager sa passion pour le Ju-jitsu, le Judo et le Ne-waza.</p>
+            <div class="container-sensei">
+                <img src="public/assets/img/pp-fred.png" alt="">
+            </div>
+            <h2 class="text-light fs-3">Frédéric Bourgouin</h2>
+            <p class="text-light p-2 mx-auto">7ème DAN, à commencé le judo, le ju-jitsu à l'âge de 5 ans et s'adonne depuis plus de 30 ans à partager sa passion pour le Ju-jitsu, le Judo et le Ne-waza.</p>
         </div>
     </div>
 </div>
