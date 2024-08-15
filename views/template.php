@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="node_modules/fontawesome-free/css/all.min.css">
     <script src="node_modules/gsap/dist/all.js"></script>
     <script src="node_modules/typewriter-effect/dist/core.js"></script>
+    <script type="module" src="node_modules/progressbar.js/dist/progressbar.min.js"></script>
 </head>
-<body class="bg-dark">
+<body class="bg-dark text-light">
 
     <header>
         <img class="img header-logo" src="public/assets/img/header_logo.webp" alt="brand_icon">
@@ -31,7 +32,7 @@
 
     <?= $view ?>
 
-    <footer class="container-fluid bg-red text-light pt-5 pb-2">
+    <footer class="container-fluid bg-red text-light pt-5 pb-2 mt-5">
         <div class="row align-items-center justify-content-center justify-content-md-between mx-sm-5 my-5">
             <div class="col-md-4 col-12 mb-4 text-center text-md-start">
                 <p class="fs-2"><strong>BUDOSPORT 80</strong></p>
@@ -63,6 +64,6 @@
     <script type="module" src="public/assets/js/scrollEffect.js"></script>
     <script type="module" src="public/assets/js/TextAnimations.js"></script>
     <script type="module" src="public/assets/js/homeAnimations.js"></script>
-
+    <script type="module" src="public/assets/js/loadingbarEffects.js"></script>
 </body>
 </html>

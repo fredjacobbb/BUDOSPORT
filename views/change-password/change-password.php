@@ -16,7 +16,7 @@
     </div>
 <?php endif; ?>
 
-<form method="POST" class="form-login bg-light mx-auto border border-2 rounded-2">
+<form method="POST" class="form-login text-dark bg-light mx-auto border border-2 rounded-2">
 
     <h2 class="fs-1 fw-semibold mb-5">Nouveau mot de passe</h2>
 

@@ -2,7 +2,7 @@
 
     class ViewHandler {
 
-        public static function render($view, ?string $redirect = null,?object $user = null, ?array $disciplines = null, ?array $users = null, ?array $grades = null, ?object $schedules = null, ?array $ages = null, ?object $students = null){           
+        public static function render($view,?object $techniques = null, ?string $redirect = null,?object $user = null,array|object|null $disciplines = null, ?array $users = null, ?array $grades = null, ?object $schedules = null, ?array $ages = null, ?object $students = null, ?array $categories = null, ?object $student = null){           
             require "views/$view/$view.php";
             require "views/template.php";
         }

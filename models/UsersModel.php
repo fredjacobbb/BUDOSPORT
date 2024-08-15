@@ -21,12 +21,20 @@
             return $stmt->fetch(PDO::FETCH_OBJ);
         }
 
-        public function getStudentByToken($token){
+        public function checkUserExistByToken($token){
             $sql = "SELECT 1 FROM students WHERE student_token = ?;";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1,$token);
             $stmt->execute();
             return $stmt->fetch();
+        }
+       
+        public function getStudentByToken($token){
+            $sql = "SELECT * FROM students WHERE student_token = ?;";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1,$token);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_OBJ);
         }
 
         public function validStudentTokenMail($token){

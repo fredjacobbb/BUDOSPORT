@@ -10,6 +10,12 @@ body {
   padding: 0;
 }
 
+#pgBar {
+  background-color: #f8f9fa;
+  border-radius: 100%;
+  width: clamp(7rem, 50%, 15rem);
+}
+
 .vh-25 {
   height: 25vh !important;
 }
@@ -62,6 +68,15 @@ nav {
   scrollbar-color: silver #212529;
 }
 
+.first-letter-red::first-letter {
+  color: #a41c27 !important;
+  font-size: 4em;
+}
+
+.card-category {
+  width: clamp(15rem, 80%, 20rem);
+}
+
 h1 {
   color: #f8f9fa;
   display: inline-block;
@@ -72,12 +87,20 @@ h1 {
   font-size: 4rem;
 }
 
+.student-profil-form div {
+  width: clamp(8rem, 80%, 15rem);
+}
+
+.technique_valid::after {
+  content: '<p class="text-light">SALUT</p>';
+}
+
 nav ul {
   display: flex;
   justify-content: start;
   list-style: none;
   padding: 0;
-  margin: 1.2em 0;
+  margin: 1em 0;
 }
 nav ul li {
   text-align: center;
@@ -86,7 +109,7 @@ nav ul li a {
   display: block;
   padding: 0.6em;
   margin: 0.5em;
-  min-width: 250px !important;
+  min-width: 200px !important;
   text-decoration: none;
   color: #f8f9fa;
 }
@@ -269,6 +292,10 @@ p {
   header .header-logo {
     min-width: 380px;
   }
+  nav ul {
+    justify-content: center;
+    margin: 2em 0;
+  }
   .section-for-subscriber-home {
     margin-top: 0 !important;
     height: 40vh;
@@ -325,6 +352,12 @@ p {
     margin-top: 3em !important;
     max-width: 450px !important;
   }
+  .table-group-divider td {
+    vertical-align: middle;
+  }
+}
+.form-techniques {
+  width: clamp(300px, 80%, 400px);
 }
 
 /*# sourceMappingURL=style.css.map */

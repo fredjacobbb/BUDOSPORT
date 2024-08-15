@@ -182,7 +182,7 @@
 
         public function changePassword(){
             if (!empty($_GET['token'])) {
-                if(!$this->usersModel->getStudentByToken($_GET['token'])){
+                if(!$this->usersModel->checkUserExistByToken($_GET['token'])){
                     ViewHandler::render('home');
                 }else{
                     if (!empty($_POST['password'])) {

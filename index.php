@@ -15,17 +15,18 @@
     require 'models/DisciplinesModel.php';
     require 'models/GradesModel.php';
     require 'models/SchedulesModel.php';
+    require 'models/TechniquesModel.php';
     
     require 'viewer/ViewHandler.php';
 
     require 'controllers/admin/AdminController.php';
     require 'controllers/UserActionsController.php';
     require 'controllers/SchedulesController.php';
+    require 'controllers/TechniquesController.php';
 
-    // $adminController = new AdminController();
     $userActionsController = new UserActionsController(new DisciplinesModel(), new UsersModel(), new GradesModel());
     $disciplinesModel = new DisciplinesModel();
-    $adminActionsController = new AdminController(new SchedulesController(new SchedulesModel(), new DisciplinesModel(), new UsersModel()));
+    $adminActionsController = new AdminController(new SchedulesController(new SchedulesModel(), new DisciplinesModel(), new UsersModel(), new TechniquesModel()));
 
     if (isset($_GET['q'])) {
         switch ($_GET['q']) {
@@ -59,6 +60,9 @@
                         case 'students':
                             $adminActionsController->listStudentsController();
                             break;
+                        case 'student':
+                            $adminActionsController->profilStudentController();
+                            break;
                         case 'schedules':
                             $adminActionsController->schedulesController();
                             break;
@@ -67,6 +71,12 @@
                             break;
                         case 'delete-schedule':
                             $adminActionsController->deleteScheduleController();
+                            break;
+                        case 'add-technique':
+                            $adminActionsController->addTechniqueController();
+                            break;
+                        case 'valid-technique-student':
+                            $adminActionsController->validStudentTechniquesController();
                             break;
                         default:
                             var_dump("error action");die;

@@ -34,20 +34,20 @@
 
 <form method="POST" class="form-login bg-light mx-auto border border-2 rounded-2">
 
-    <h2 class="fs-1 fw-semibold mb-5">Connexion</h2>
+    <h2 class="fs-1 fw-semibold mb-5 text-dark">Connexion</h2>
 
-    <label for="email" class="form-label">Email</label>
+    <label for="email" class="form-label text-dark">Email</label>
     <input name="email" type="email" placeholder="frdjacobbb@gmail.ze" class="form-control mb-2 fw-light" id="email" value="ok@ok.fr" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['email']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['email'] ?? '' ?></p>
     
-    <label for="firstname" class="form-label">Prénom</label>
+    <label for="firstname" class="form-label text-dark">Prénom</label>
     <input type="text" name="firstname" placeholder="fred" value="okok" class="form-control mb-2 fw-light" id="firstname" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['firstname']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['firstname'] ?? '' ?></p>
     <div>
         <p class="fw-lighter error-message-firstname text-danger fs-6 my-2"></p>
     </div>
 
-    <label for="password" class="form-label">Mot de passe</label>
+    <label for="password" class="form-label text-dark">Mot de passe</label>
     <input type="password" name="password" value="aozfjjafFAZ//!!CA888" class="form-control fw-light" id="password" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password'] ?? '' ?></p>
     <div>
