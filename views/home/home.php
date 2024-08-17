@@ -20,10 +20,10 @@
     </div>
 </div>
 
-<div class="section-for-subscriber-home justify-content-center d-flex flex-wrap align-content-center align-items-center">
-    <p class="text-light p-4 text-animation fs-2 fw-light"></p>
-    <div class="mx-auto w-100 text-center">
-        <button class="btn btn-light fw-bolder fs-5 text-red">Nous rejoindre</button>
+<div class="section-for-subscriber-home justify-content-center d-flex flex-wrap py-5 px-2">
+    <p class="text-light text-animation text-center fs-4 fw-light"></p>
+    <div class="mx-auto my-3 w-100 text-center">
+        <button class="btn btn-light fw-bolder text-red">Nous rejoindre</button>
     </div>
 </div>
 

@@ -58,12 +58,11 @@
         </div>
         <p class="text-center m-0">&copy; <?= date('Y') ?> BUDOSPORT 80. Tous droits réservés.</p>
     </footer>
-
-    <script src="public/assets/js/AnimationsEffects.js"></script>
+   
+    <script src="public/assets/js/FlashMessage.js"></script>
     <script src="public/assets/js/validator/form-validation.js"></script>
     <script type="module" src="public/assets/js/scrollEffect.js"></script>
     <script type="module" src="public/assets/js/TextAnimations.js"></script>
-    <script type="module" src="public/assets/js/homeAnimations.js"></script>
     <script type="module" src="public/assets/js/loadingbarEffects.js"></script>
 </body>
 </html>

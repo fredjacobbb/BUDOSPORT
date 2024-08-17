@@ -49,7 +49,7 @@
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['email']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['email'] ?? '' ?></p>
 
     <label class="form-label mt-1" for="password">Mot de passe</label>
-    <input type="password" name="password" value="Azerty789////" class="form-control fw-light" id="password" required>
+    <input type="password" name="password" value="aozfjjafFAZ//!!CA888" class="form-control fw-light" id="password" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password'] ?? '' ?></p>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password-retyped']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password-retyped'] ?? '' ?></p>
     <div class="error-message-password text-danger fs-6 my-2"></div>
@@ -57,7 +57,7 @@
 
 
     <label class="form-label mt-1" for="password">Re-mot de passe</label>
-    <input type="password" name="password-retyped" value="Azerty789////" class="form-control fw-light" id="password" required>
+    <input type="password" name="password-retyped" value="aozfjjafFAZ//!!CA888" class="form-control fw-light" id="password" required>
 
     <label class="form-label mt-1" for="birthdate">Date de naissance</label>
     <input class="form-control fw-light" name="birthdate" value="2000-08-05" type="date" required>

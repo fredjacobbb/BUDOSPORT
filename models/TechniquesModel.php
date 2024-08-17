@@ -7,7 +7,7 @@
         }
 
         public function getAllTechniquesByDisciplineGradeCategory($discipline_id, $category,$grade_id){
-            $sql = 'SELECT `technique_name`, `technique_description` FROM `disciplines_techniques` AS `dt` INNER JOIN `techniques` ON `dt`.`technique_id` = `techniques`.`technique_id` WHERE `discipline_id` = ? AND `techniques`.`technique_category` = ? AND `techniques`.`grade_id` = ?';
+            $sql = 'SELECT `technique_name`, `technique_description`, `dt`.`technique_id` FROM `disciplines_techniques` AS `dt` INNER JOIN `techniques` ON `dt`.`technique_id` = `techniques`.`technique_id` WHERE `discipline_id` = ? AND `techniques`.`technique_category` = ? AND `techniques`.`grade_id` = ?';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $discipline_id);
             $stmt->bindValue(2, $category);
@@ -17,7 +17,7 @@
         }
 
         public function getAllTechniquesByDisciplineGrade($discipline_id,$grade_id){
-            $sql = 'SELECT `technique_name`, `technique_category` FROM `disciplines_techniques` AS `dt` INNER JOIN `techniques` ON `dt`.`technique_id` = `techniques`.`technique_id` WHERE `discipline_id` = ? AND `techniques`.`grade_id` = ?';
+            $sql = 'SELECT `technique_name`, `technique_category`, `technique_id` FROM `disciplines_techniques` AS `dt` INNER JOIN `techniques` ON `dt`.`technique_id` = `techniques`.`technique_id` WHERE `discipline_id` = ? AND `techniques`.`grade_id` = ?';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $discipline_id);
             $stmt->bindValue(2, $grade_id);
@@ -66,11 +66,11 @@
         }
 
         public function validStudentTechniques($student_id, $technique_id){
-            $sql = 'INSERT INTO `techniques_students` (`student_id`,`technique_id`,`achievement`) VALUES (?,?,NOW())';
+            $sql = 'INSERT INTO `techniques_students` (`student_id`,`technique_id`) VALUES (?,?)';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $student_id);
             $stmt->bindValue(2, $technique_id);
-            $stmt->execute();
+            var_dump($stmt->execute());
         }
 
         public function getAllTechniquesLearnedByStudentId($student_id,$technique_name){
@@ -81,7 +81,5 @@
             $stmt->execute();
             return $stmt->fetchAll();
         }
-
-
 
     }

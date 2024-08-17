@@ -167,4 +167,11 @@
             }
         }
 
+        public function gradePassStudent($student_id){
+            $sql = "UPDATE students SET grade_id = grade_id + 1 WHERE student_id = ? AND grade_id <= 7";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, $student_id);
+            $stmt->execute();
+        }
+
     }

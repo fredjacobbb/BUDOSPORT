@@ -12,7 +12,13 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
-        public function getOne(){
+        public function getOne($grade_id){
+            $sql = "SELECT grade_name FROM grades WHERE grade_id = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, $grade_id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_OBJ);
 
         }
+        
     }

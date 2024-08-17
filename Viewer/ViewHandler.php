@@ -10,7 +10,11 @@
         public static function redirect($url, ?object $user = null){
             if (!headers_sent()) {
                 header("Location: ./?q=$url");
-                return $user;
+                if ($user) {
+                    return $user;
+                }else{
+                    return true;
+                }
             }
         }
 
