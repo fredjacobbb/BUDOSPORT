@@ -28,8 +28,16 @@
         <a class="text-decoration-none text-light" href="mailto:">Ouvrez votre boite mail en cliquant ici</a>
     </div>
 <?php endif; ?>
+<?php if(isset($_SESSION['budosport']['change_password_error'])): ?>
+    <div class="alert alert-red text-center text-light flash flash-error" role="alert">
+        <p class="m-0"><?= Flash::display("change_password_error"); ?></p>
+        <hr>
+        <a class="text-decoration-none text-light" href="mailto:">Ouvrez votre boite mail en cliquant ici</a>
+    </div>
+<?php endif; ?>
 
-<form method="POST" class="form-login text-dark bg-light mx-auto border border-2 rounded-2">
+
+<form method="POST" class="form-login text-dark bg-light border border-2 rounded-2">
 
     <h2 class="fs-1 fw-semibold mb-5">Saisir les champs</h2>
 
@@ -48,6 +56,7 @@
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['name']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['name'] ?? '' ?></p>
     <div class="error-message-name text-danger fs-6 my-2"></div>
 
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
     <div class="text-center m-4">
         <button class="btn btn-registration btn-red text-light" type="submit">Valider</button>

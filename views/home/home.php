@@ -7,13 +7,18 @@
         <p class="m-0"><?= Flash::display("user_disconnect"); ?></p>
     </div>
 <?php endif; ?>
+<?php if(isset($_SESSION['budosport']['error_email_checking'])): ?>
+    <div class="alert alert-red text-center text-light flash flash-error" role="alert">
+        <p class="m-0"><?= Flash::display("error_email_checking"); ?></p>
+    </div>
+<?php endif; ?>
 
 <div class="position-relative row align-items-center w-100 m-0 p-0 banner-budo">
     <div class="banner-budo-home-bg">
     </div>
     <div class="top-50 position-absolute offer-description text-center">
         <div class="d-flex justify-content-center align-items-center">
-            <b class="fs-0 text-red m-3">Deux</b>
+            <b class="fs-0 text-red mx-3">Deux</b>
             <h3 class="fs-0 text-light m-0">séances</h3>
         </div>
         <p class="fs--1 text-light fw-bolder text-decoration-underline link-offset-3">OFFERTES</p>
@@ -27,26 +32,12 @@
     </div>
 </div>
 
-<!-- <div class="section-disciplines">
-    <div class="d-flex justify-content-center align-content-center align-items-center my-5">
-        <h2 class="text-red"><?= count($disciplines) ?></h2>
-        <b class="text-light fs-0"> DISCIPLINES </b>
-    </div>
-    <div class="d-flex flex-wrap justify-content-start justify-content-center align-content-center mb-5 h-100">
-        <?php foreach($disciplines as $key => $d): ?>
-            <div class="discipline-card d-none card-<?= $key ?>">
-                <p class="w-100 h-100 fs-1 fw-bold"><?= ucfirst($d->discipline_name) ?></p>
-            </div>
-        <?php endforeach ?>
-    </div>
-</div> -->
-
 <div class="section-presentation d-flex flex-wrap align-items-center align-content-center">
     <div class="container-one title-block d-flex align-items-center col-12 col-md-6">
-        <h2 class="text-light title-section ps-5 py-3">UN MAÎTRE</h2>
+        <h2 class="text-light title-section ps-3 w-100 py-5">UN MAÎTRE</h2>
     </div>
-    <div class="container-two d-flex align-items-center justify-content-center mx-auto col-12 col-md-6">
-        <div class="text-center p-3">
+    <div class="container-two d-flex align-items-center justify-content-center mx-auto col-12 col-md-4">
+        <div class="text-center p-5 shadow shadow rounded">
             <div class="container-sensei">
                 <img src="public/assets/img/pp-fred.png" alt="">
             </div>
@@ -56,8 +47,17 @@
     </div>
 </div>
 
-<div class="section-">
-
+<div class="section-place d-flex flex-wrap-reverse justify-content-between align-items-center my-5">
+    <div class="container-one col-12 col-md-6 me-3">
+        <div id="map" class="shadow">
+            <iframe width="100%" height="300px" frameborder="0" allowfullscreen allow="geolocation" src="//umap.openstreetmap.fr/fr/map/carte-sans-nom_1106076?scaleControl=false&miniMap=false&scrollWheelZoom=true&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=null&onLoadPanel=none&captionBar=false&captionMenus=true&captionControl=null"></iframe></p>
+        </div>
+    </div>
+    <div class="container-two col-12 col-md-5">
+        <div class="title-block-2">
+            <h2 class="text-light title-section-2 bg-red ps-5 py-5 text-center">UN LIEU</h2>
+        </div>
+    </div>
 </div>
 
 <?php $view = ob_get_clean() ?>

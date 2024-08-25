@@ -24,9 +24,12 @@
     require 'controllers/SchedulesController.php';
     require 'controllers/TechniquesController.php';
 
-    $userActionsController = new UserActionsController(new DisciplinesModel(), new UsersModel(), new GradesModel());
+    $userActionsController = new UserActionsController(new DisciplinesModel(), new UsersModel(), new GradesModel(), new TechniquesModel());
     $disciplinesModel = new DisciplinesModel();
-    $adminActionsController = new AdminController(new SchedulesController(new SchedulesModel(), new DisciplinesModel(), new UsersModel(), new TechniquesModel()));
+    $schedulesController = new SchedulesController(new SchedulesModel(), new DisciplinesModel(), new UsersModel());
+    $adminActionsController = new AdminController(new SchedulesController(new SchedulesModel(), new DisciplinesModel(), new UsersModel()));
+
+    TokenGenerator::generateCsrfToken();
 
     if (isset($_GET['q'])) {
         switch ($_GET['q']) {
@@ -54,16 +57,33 @@
             case 'disconnect':
                 $userActionsController->disconnect();
                 break;
+            case 'schedules':
+                ViewHandler::render('schedules', schedules: $schedulesController->listSchedules());
+                break;
+            case 'admin':
+                // create FAKE admin form here
+                ViewHandler::render('fake-admin');
+                break;
+            default:
+                $disciplines = $disciplinesModel->getAllDisciplines();
+                ViewHandler::render('home', disciplines: $disciplines);
+                break;
+        }
+    }else if(isset($_GET['real'])){
+        switch ($_GET['real']) {
             case 'admin':
                 if (isset($_GET['action'])) {
                     switch ($_GET['action']) {
-                        case 'students':
+                        case 'dashboard-students':
                             $adminActionsController->listStudentsController();
                             break;
                         case 'student':
                             $adminActionsController->profilStudentController();
                             break;
-                        case 'schedules':
+                        case 'delete':
+                            $adminActionsController->deleteStudentController();
+                            break;
+                        case 'dashboard-schedules':
                             $adminActionsController->schedulesController();
                             break;
                         case 'add-schedule':
@@ -75,22 +95,20 @@
                         case 'add-technique':
                             $adminActionsController->addTechniqueController();
                             break;
-                        case 'valid-technique-student':
-                            $adminActionsController->validStudentTechniquesController();
-                            break;
                         default:
-                            var_dump("error action");die;
+                            ViewHandler::redirect('home');
                             break;
                     }
                 }
                 break;
+
             default:
-                $disciplines = $disciplinesModel->getAllDisciplines();
-                ViewHandler::render('home', disciplines: $disciplines);
+                ViewHandler::redirect('home');
                 break;
         }
     }else{
         $disciplines = $disciplinesModel->getAllDisciplines();
         ViewHandler::render('home', disciplines:$disciplines);
+
     }
 

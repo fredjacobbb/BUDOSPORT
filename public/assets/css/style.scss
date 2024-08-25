@@ -12,6 +12,17 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+}
+
+.title-h2-underline-white {
+    text-decoration: underline 6px solid white;
+    text-underline-offset: 10px;
+    margin: 0 30px;
+}
+
+.accordion-dark {
+    background-color: #212529 !important;
 }
 
 #pgBar {
@@ -20,18 +31,21 @@ body {
     width: clamp(7rem,50%,15rem);
 }
 
-
-
 .vh-25{
     height: 25vh !important;
 }
 
 h2 {
     font-family: gotham !important;
+    font-size: 3em !important;
 }
 
 a {
     text-decoration: none;
+}
+
+#map {
+    width: 100% !important;
 }
 
 .fs-0{
@@ -40,6 +54,10 @@ a {
 
 .fs--1 {
     font-size: 3em !important;
+}
+
+.fs--2 {
+    font-size: 12em !important;
 }
 
 header {
@@ -69,19 +87,47 @@ header {
     background-color: $red;
 }
 
+.section-place {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    .container-two {
+        h2 {
+            clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 10% 100%, 0% 50%);
+        }
+    }
+}
+
 nav {
     overflow-x: scroll;
     scrollbar-color: silver #212529;
 }
 
 .first-letter-red::first-letter {
-    color: $red !important;
+    color: #212529 !important;
     font-size: 4em;
+}
 
+.discipline-grade-block {
+    width: clamp(250px,80%,310px);
+    background-color: #a41c27;
 }
 
 .card-category {
-    width: clamp(15rem,80%,20rem);
+    width: 100%;
+    .title {
+        font-family: gotham !important;
+        background-color: $red;
+    }
+}
+
+.accordion-button:not(.collapsed) {
+    color: #212529 !important;
+    background-color: #f8f9fa !important;
+    box-shadow: none !important;
+}
+
+.accordion-button:focus {
+    box-shadow: none !important;
 }
 
 
@@ -109,7 +155,6 @@ h1 {
 
 nav ul {
     display: flex;
-    justify-content: start;
     list-style: none;
     padding: 0;
     margin: 1em 0;
@@ -118,7 +163,6 @@ nav ul {
         a {
             display: block;
             padding: .6em;
-            margin: .5em;
             min-width: 200px !important;
             text-decoration: none;
             color: #f8f9fa;
@@ -165,7 +209,6 @@ nav ul {
     margin: 3em auto;
     padding: 2em;
     padding-bottom: 0;
-    margin-bottom: 3em;
     h2 {
         font-family: gotham !important;
     }
@@ -205,22 +248,36 @@ p {
     margin: 0;
 }
 
-.btn-registration {
-
-}
-
 .container-disciplines {
-    margin-top: 3em;
     .container-discipline {
+        width: 100%;
+        margin: 2.2em 0 8em 0 !important;
+        height: 100vh;
+        h3 {
+            text-decoration: underline $red;
+            text-underline-offset: 8px;
+            background-color: #212529;
+            padding: .5em;
+            text-align: center;
+            margin: .5em 0 .5em 0;
+            font-family: 'gotham';
+            font-size: xxx-large !important;
+        }
         &:nth-child(odd){
             h3{
                 // background-color: white;
-                color: #212529;
+                color: $red;
+                text-decoration: none;
+                background-color: whitesmoke;
+                text-decoration: underline 5px solid #212529;
             }
             h4 , p {
-                color: #212529;
+                color: #f8f9fa;
             }
-            background-color: rgb(169, 166, 166);
+            background-color: #212529;
+        }
+        h4, p {
+            margin-top: 1.4em;
         }
     }
 }
@@ -268,17 +325,26 @@ p {
 }
 
 
+#map {
+    width: clamp(450px, 80%, 600px);
+    height: clamp(30rem,30vh,15rem);
+    iframe {
+        width: 100%;
+        height: 100%;
+    }
+}
 
 .section-presentation {
     height: 80vh;
     margin: 0;
     .container-one {
-        background-color: $red;
         h2 {
+            background-color: $red;
+            clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
             display: inline-block;
-            font-size: 1.5em;
             padding: 0;
             margin: 0;
+            text-align: start;
         }
     }
     .container-two {
@@ -293,7 +359,6 @@ p {
         p {
             line-height: 25px;    
             &::first-letter {
-                color: $red;
                 font-weight: bolder;
                 font-size: 2em;
             }        
@@ -312,7 +377,7 @@ p {
         font-size: 6em !important;
     }
     .title-section {
-        font-size: 4em !important;
+        font-size: 3.5em !important;
     }
     header{
         text-align: start !important;
@@ -320,9 +385,11 @@ p {
             min-width: 380px;
         }
     }
-    nav ul {
-        justify-content: center;
-        margin: 2em 0;
+    nav {
+        ul {
+            justify-content: start;
+            margin: 2em 0;
+        }
     }
     .section-for-subscriber-home {
         margin-top: 0 !important;
@@ -355,8 +422,9 @@ p {
             height: 40%;
             text-align: center;
             clip-path: polygon(0% 0%, 75% 0%, 85% 51%, 75% 100%, 0% 100%);
+            background-color: $red;
             h2 {
-                text-align: center;
+                text-align: start;
                 font-size: xx-large;
             }
         }
@@ -370,18 +438,15 @@ p {
                 margin: .7em 0;
             }
             p {
-                width: clamp(400px,40%,450px);
                 text-align: center;
             }
             img {
                 margin: 0;
+                width: clamp(3em,50%,9em);
+                border-radius: 100%;
+                border: 7px solid $red;
             }
         }
-    }
-
-    .form-login {
-        margin-top: 3em !important;
-        max-width: 450px !important;
     }
 
     .table-group-divider {
@@ -389,6 +454,22 @@ p {
             vertical-align: middle;
         }
     }
+
+    .container-disciplines {
+        .container-discipline {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .section-place {
+        height: 80vh;
+        .container-two {
+            h2 {
+                clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 10% 100%, 0% 50%);
+            }
+        }
+    }
+
     
 }
 .form-techniques {

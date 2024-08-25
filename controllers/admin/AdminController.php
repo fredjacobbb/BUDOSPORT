@@ -15,8 +15,7 @@
         public function schedulesController(){
             $schedules = $this->schedulesController->listSchedules();
             $disciplines = $this->disciplines->getAllDisciplines();
-            ViewHandler::render("schedules", schedules:$schedules, disciplines:$disciplines);
-            
+            ViewHandler::render("dashboard-schedules", schedules:$schedules, disciplines:$disciplines);
         }
 
         public function deleteScheduleController(){
@@ -52,12 +51,12 @@
                     }   
                 }
             }        
-            ViewHandler::render('students', students: $this->students);            
+            ViewHandler::render('dashboard-students', students: $this->students);            
         }
 
         public function profilStudentController(){
             ob_start();
-            $token = $_GET['student_tk'] ?? '';
+            $token = $_GET['student_token'] ?? '';
             if (!empty($token)) {
                 $this->student = new stdClass();
                 // check if student exist by token in db
@@ -80,15 +79,17 @@
                         }
                     }
 
-                    $this->student->grade_name = $this->gradeModel->getOne($this->student->grade_id);
+                    unset($_SESSION['grade_updated']);
 
-
-                    if ($this->student->nbTechniques === $this->student->validTechniques) {
+                    if (!isset($_SESSION['grade_updated']) && ($this->student->nbTechniques === $this->student->validTechniques)) {
                         // passage au grade superieur if not black belt
                         $this->users->gradePassStudent($this->student->student_id);
-                        header("Location: /?q=admin&action=student&student_tk={$this->student->student_token}");
+                        $_SESSION['grade_updated'] = true;
+                        header("Location: /?real=admin&action=student&student_token={$this->student->student_token}");
                         exit();
                     }
+
+                    $this->student->grade_name = $this->gradeModel->getOne($this->student->grade_id);
 
                     $birthdate = new DateTime($this->student->student_birthdate);
 
@@ -100,7 +101,7 @@
                                 $this->techniques->validStudentTechniques($this->student->student_id, $technique_id);
                             }
                         }
-                        header("Location: /?q=admin&action=student&student_tk={$this->student->student_token}");
+                        header("Location: /?real=admin&action=student&student_token={$this->student->student_token}");
                         exit();
                     }
                     ViewHandler::render('student-profil', student: $this->student);    
@@ -113,13 +114,21 @@
             $this->techniquesController->addTechniqueController();
         }
 
-        public function validStudentTechniquesController($student_id, array $techniques_ids){
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                var_dump("ok");die;
-                foreach ($techniques_ids as $key => $technique_id) {
-                    $this->techniques->validStudentTechniques($student_id, $technique_id);
+        public function deleteStudentController(){
+            try {
+                if (empty($_GET['student_token'])) {
+                    throw new Exception("Un problème est survenu lors de la suppression il semblerait que l'utilisateur n'existe pas.");
                 }
+                if(!$this->users->deleteStudentByToken($_GET['student_token'])){
+                    throw new Exception("L'utilisateur a bien été supprimé.");
+                }
+                Flash::set("L'utilisateur à bien été supprimé." , "deletion_success");
+                $this->listStudentsController();
+            }catch (Exception $err){
+                Flash::set($err->getMessage(), 'deletion_error');
+                $this->listStudentsController();
             }
+
         }
 
     }

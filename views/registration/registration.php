@@ -18,12 +18,10 @@
 <?php if(!empty($_SESSION['budosport']['registration_failed'])): ?>
     <div class="alert alert-red text-center text-light flash flash-error" role="alert">
         <p class="m-0"><?= Flash::display("registration_failed"); ?></p>
-        <hr>
-        <a class="text-decoration-none text-light" href="mailto:">Ouvrez votre boite mail en cliquant ici</a>
     </div>
 <?php endif; ?>
 
-<form method="POST" class="form-login bg-light mx-auto border border-2 rounded-2 text-dark">
+<form method="POST" class="form-login bg-light border border-2 rounded-2 text-dark">
 
     <h2 class="fs-1 fw-semibold">Inscription</h2>
 
@@ -80,11 +78,12 @@
     </select>
     <p class="<?= !empty(Validator::$errors['grade']) ? 'text-danger' : 'd-none' ?>"><?= Validator::$errors['grade'] ?? '' ?></p>
 
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+
     <div class="text-center m-4">
         <button class="btn btn-red text-light btn-registration" type="submit">S'inscrire</button>
     </div>
 
 </form>
-
 
 <?php $view = ob_get_clean() ?>

@@ -6,15 +6,16 @@
     // echo '<pre>';var_dump($student);echo '</pre>';
 ?>
 
-<div class="my-md-5">
+<a href="/?real=admin&action=dashboard-students" class="text-light m-5 d-inline-block "><i class="fa fa-arrow-left px-3"></i>Liste étudiants</a>
 
+<div class="my-md-5">
     <div class="my-md-5 d-flex flex-wrap flex-md-nowrap align-items-center justify-content-evenly">
-        <div class="my-5 shadow p-5">
-            <p>
-                <img src="public/assets/img/<?= $student->grade_name ?>.png" alt="">
-            </p>
+        <div class="my-5 shadow bg-red">
             <h2 class="text-center fs-0 first-letter-red"><?= ucfirst($student->discipline->discipline_name) ?></h2>
-            <p class="fs-4"><?= $student->student_name ?> <?= $student->student_firstname ?> (<?= $student->age ?> ans)</p>
+            <p class="text-center p-3">
+                <?php $img = $student->grade_name; ?>
+                <img class="w-50" src="public/assets/img/<?= strval($img->grade_name) ?>.png" alt="">
+            </p>
         </div>
         <div id="pgBar" class="fs-1 fw-bold" data-techniques="<?= $student->nbTechniques ?>" data-valid="<?= $student->validTechniques ?>" percentage-score="<?= intval(($student->validTechniques * 100) / $student->nbTechniques) ?>" data-value="20" data-preset="circle">
 

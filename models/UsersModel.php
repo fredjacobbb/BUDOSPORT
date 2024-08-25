@@ -50,6 +50,13 @@
             }
         }
 
+        public function deleteStudentByToken($student_token){
+            $sql = "UPDATE students SET deleted_at = NOW() WHERE student_token = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1,$student_token);
+            $stmt->execute();
+        }
+
         public function getStudentByEmailFirstnameLastname($email,$firstname,$lastname){
             $sql = "SELECT student_email, student_token, student_id FROM students WHERE student_email = ? AND student_firstname = ? AND student_name = ?";
             $stmt = $this->db->prepare($sql);
@@ -84,10 +91,11 @@
             return ($this->db->lastInsertId() > 0) ?? false;
         } 
 
-        public function checkHash($email){
-            $sql = "SELECT `student_email`, `student_password` FROM `students` WHERE student_email = ?";
+        public function checkHash($email,$firstname){
+            $sql = "SELECT `student_password` FROM `students` WHERE student_email = ? AND student_firstname = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $email);
+            $stmt->bindValue(2, $firstname);
             $stmt->execute();
             if($student = $stmt->fetch()){
                 return $student['student_password'];
@@ -95,26 +103,28 @@
         }
 
         public function checkPasswordLogin($email,$firstname,$password){
-            $passwordHash = $this->checkHash($email);
+            $passwordHash = $this->checkHash($email, $firstname);
             $sql = 'SELECT * FROM students WHERE student_email = ? AND student_firstname = ?';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $email);
             $stmt->bindValue(2, $firstname);
             $stmt->execute();
-            if($stmt->fetch()){
-                if(password_verify($password, $passwordHash)){
-                    $_SESSION['user_info'] = $stmt->fetch();
-                    return true;
-                }else{
-                    return false;
+            $user_info = $stmt->fetch(PDO::FETCH_OBJ);
+            if($user_info){
+                if ($user_info->student_valid === 0) {
+                    throw new Exception("Veuillez activer votre compte, via le lien envoyé sur la boite email, $email");
                 }
+                if(!password_verify($password, $passwordHash)){
+                    throw new Exception("Problème lors de la connexion");
+                }
+                return $user_info;
             }else{
                 return false;
             }
         }
 
         public function getStudentsByDisciplineAndAgeId($discipline_id, $age_id){
-            $sql = "SELECT * FROM students WHERE discipline_id = ? AND age_id = ?;";
+            $sql = "SELECT * FROM students WHERE discipline_id = ? AND age_id = ? AND student_valid = 1 AND deleted_at IS NULL ;";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $discipline_id);
             $stmt->bindValue(2, $age_id);

@@ -16,7 +16,7 @@
     </div>
 <?php endif; ?>
 
-<form method="POST" class="form-login text-dark bg-light mx-auto border border-2 rounded-2">
+<form method="POST" class="form-login text-dark bg-light border border-2 rounded-2">
 
     <h2 class="fs-1 fw-semibold mb-5">Nouveau mot de passe</h2>
 
@@ -28,6 +28,8 @@
 
     <label for="password" class="form-label">Nouvelle saisie</label>
     <input type="password" name="password-retyped" class="form-control fw-light" id="password" required>
+
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
     <div class="text-center m-4">
         <button class="btn btn-registration btn-red text-light" type="submit">Valider</button>

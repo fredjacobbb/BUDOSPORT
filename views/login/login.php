@@ -32,7 +32,7 @@
     </div>
 <?php endif; ?>
 
-<form method="POST" class="form-login bg-light mx-auto border border-2 rounded-2">
+<form method="POST" class="form-login bg-light border border-2 rounded-2">
 
     <h2 class="fs-1 fw-semibold mb-5 text-dark">Connexion</h2>
 
@@ -53,6 +53,8 @@
     <div>
         <p class="fw-lighter error-message-password text-danger fs-6 my-2"></p>
     </div>
+
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
     <a href="./?q=forgot-password" class="d-inline-block my-4 text-dark fw-light text-underline-dark">Mot de passe oublié ?</a>
 
