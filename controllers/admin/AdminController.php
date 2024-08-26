@@ -131,6 +131,31 @@
 
         }
 
+        public function connectAdmin(){
+            if (!empty($_POST['admin_name']) && !empty($_POST['admin_password'])) {
+                if($this->users->connectAdmin($_POST['admin_name'],$_POST['admin_password'])){
+                    Flash::save('admin_connected');
+                    $this->listStudentsController();
+                }else{
+                    ViewHandler::render('login-admin');
+                }
+            }else{
+                ViewHandler::render('login-admin');
+            }
+        }
+
+        public function listTechniquesController(){
+            $techniques = new stdClass();
+            foreach($this->disciplines->getAllDisciplines() as $discipline_key => $discipline){
+                $techniques->disciplines[$discipline_key] = $discipline;
+                foreach ($this->gradeModel->getAll() as $grade_key => $grade) {
+                    $techniques->disciplines[$discipline_key]->grades[$grade_key] = $grade;
+                    $techniques->disciplines[$discipline_key]->grades[$grade_key]->techniques = $this->techniques->getAllTechniquesByDisciplineGrade($techniques->disciplines[$discipline_key]->discipline_id,$techniques->disciplines[$discipline_key]->grades[$grade_key]->grade_id);    
+                }
+            }
+            ViewHandler::render('dashboard-techniques', $techniques);
+        }
+
     }
 
     

@@ -184,4 +184,31 @@
             $stmt->execute();
         }
 
+        public function connectAdmin($pseudo, $password){
+            $sql = "SELECT `admin_password` FROM `admin` WHERE admin_name = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1,$pseudo);
+            $stmt->execute();
+            $admin_info = $stmt->fetch(PDO::FETCH_OBJ);
+            if($admin_info){
+                if(!password_verify($password, $admin_info->admin_password)){
+                    throw new Exception("Problème lors de la connexion");
+                }
+                return $admin_info;
+            }else{
+                return false;
+            }
+        }
+
+        // KEEP FOR CHANGE INFO
+
+        // public function insertAd(){
+        //     $password = password_hash("charlesbaudelaire", PASSWORD_BCRYPT);
+        //     $sql = 'INSERT INTO `admin` (`admin_name`, `admin_password`) VALUES (?,?);';
+        //     $stmt = $this->db->prepare($sql);
+        //     $stmt->bindValue(1,'admin');
+        //     $stmt->bindValue(2,$password);
+        //     $stmt->execute();
+        // }
+
     }

@@ -15,10 +15,18 @@
     </div>
 <?php endif; ?>
 
-<div class="overflow-x-scroll d-flex my-5">
+<ul class="list-unstyled d-flex justify-content-center flex-wrap mt-5">
+    <li class="p-3"><a class="mx-3 p-3 text-light text-decoration-none active" href="?real=admin&action=dashboard-students">Dashboard Etudiants</a></li>
+    <li class="p-3"><a class="mx-3 p-3 text-light text-decoration-none " href="?real=admin&action=dashboard-schedules">Dashboard Horaires</a></li>
+    <li class="p-3"><a class="mx-3 p-3 text-light text-decoration-none " href="?real=admin&action=dashboard-techniques">Dashboard Techniques</a></li>
+</ul>
+
+<div class="overflow-x-scroll d-flex my-5" id="dashb">
     <?php foreach($students->ages as $student): ?>
         <div class="minw-100 dashb-slide">
-            <h2 class="text-light fs-1 bg-red ps-4 py-3"><?= $student->age_tranche ?> ans</h2>
+            <div>
+                <h2 class="text-light fs-1 bg-red ps-4 py-3"><?= $student->age_tranche ?> ans</h2>
+            </div>
             <?php foreach($student->disciplines as $discipline): ?>
                 <?php if (count($discipline->students) > 0): ?>
                     <table class="table table-dark p-5 w-75 mx-auto my-5">
@@ -39,7 +47,7 @@
                                     <td><?= ucfirst($students->student_name) ?></td>
                                     <td><?= ucfirst($students->student_firstname) ?></td>
                                     <td><?= $students->student_email ?></td>
-                                    <td><?= $grade[$students->grade_id] ?></td>
+                                    <td><?= $grade[$students->grade_id - 1] ?></td>
                                     <td>
                                         <a class="btn btn-red text-light" href="/?real=admin&action=student&student_token=<?= $students->student_token ?>">profil</a>
                                     </td>

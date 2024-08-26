@@ -19,11 +19,20 @@
 
 <!-- <h3 class="text-light fs-0 mt-5 mb-0 text-center text-dark fw-bolder py-2 bg-light py-3">Gérer les horaires</h3> -->
 
-<div class="overflow-x-scroll my-5">
-    <div class="d-flex">
+<ul class="list-unstyled d-flex flex-wrap mt-5 justify-content-center">
+    <li class="p-3"><a class="mx-3 p-3 text-light text-decoration-none" href="?real=admin&action=dashboard-students">Dashboard Etudiants</a></li>
+    <li class="p-3"><a class="mx-3 p-3 text-light text-decoration-none active" href="?real=admin&action=dashboard-schedules">Dashboard Horaires</a></li>
+    <li class="p-3"><a class="mx-3 p-3 text-light text-decoration-none " href="?real=admin&action=dashboard-techniques">Dashboard Techniques</a></li>
+</ul>
+
+<div class="overflow-x-scroll my-5 dashb-container">
+    <div class="d-flex dashb-container">
         <?php foreach($schedules->ages as $key => $schedule): ?>
-            <div class="minw-100 bg-light p-0 m-0 dashb-slide-sched">
+            <div class="minw-100 bg-light p-0 m-0 dashb-slide-sched" class="dashb" id="dashb">
                 <h2 class="text-light fs-1 bg-red ps-4 py-3"><?= $schedule->age_tranche ?> ans</h2>
+                <div class="text-end">
+                    <button class="btn btn-dark next mx-3">NEXT</button>
+                </div>
                 <form  method="POST" action="./?real=admin&action=add-schedule" class="d-flex flex-wrap flex-md-nowrap justify-content-center">
                     <input type="hidden" name="age_id" value="<?= $schedule->age_id ?>">
                     <input type="hidden" name="age_id" value="<?= $schedule->age_id ?>">

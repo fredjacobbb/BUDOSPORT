@@ -24,8 +24,8 @@
     </div>
 </div>
 
-<div>
-    <h2 class="my-5">Liste techniques :</h2>
+<div class="my-5">
+    <h2 class="my-5">Liste techniques</h2>
     <div class="accordion accordion-flush w-75 mx-auto" id="accordionFlushExample">
         <div class="accordion-item bg-dark">
             <h2 class="accordion-header">

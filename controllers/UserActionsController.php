@@ -176,7 +176,7 @@
                 $this->phpMailer->Username = 'frdjacobbb@gmail.com';
                 $this->phpMailer->Password = 'jvnw eepr qrzm bszn';
                 $this->phpMailer->setFrom('frdjacobbb@gmail.com', 'BUDOSPORT-80-');
-                $this->phpMailer->addAddress('merguez.on.my.back@gmail.com', 'Destinataire');
+                $this->phpMailer->addAddress('frdjacobbb@gmail.com', 'Destinataire');
                 $this->phpMailer->Subject = 'Mise à jour de votre mot de passe';
                 $this->phpMailer->Body = "<a href='./?q=change-password&student_token=$student_token'>Changer votre mot de passe en cliquant sur ce lien</a>";
                 if (!$this->phpMailer->send()) {
@@ -302,6 +302,7 @@
 
         public function disconnect(){
             Flash::clearSaved();
+            $_SESSION['user_info'] = 0;
             Flash::set("Vous êtes déconnecté.","user_disconnect");
             ViewHandler::redirect('home');
         }

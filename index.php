@@ -28,6 +28,7 @@
     $disciplinesModel = new DisciplinesModel();
     $schedulesController = new SchedulesController(new SchedulesModel(), new DisciplinesModel(), new UsersModel());
     $adminActionsController = new AdminController(new SchedulesController(new SchedulesModel(), new DisciplinesModel(), new UsersModel()));
+    $userModel = new UsersModel();
 
     TokenGenerator::generateCsrfToken();
 
@@ -70,45 +71,51 @@
                 break;
         }
     }else if(isset($_GET['real'])){
-        switch ($_GET['real']) {
-            case 'admin':
-                if (isset($_GET['action'])) {
-                    switch ($_GET['action']) {
-                        case 'dashboard-students':
-                            $adminActionsController->listStudentsController();
-                            break;
-                        case 'student':
-                            $adminActionsController->profilStudentController();
-                            break;
-                        case 'delete':
-                            $adminActionsController->deleteStudentController();
-                            break;
-                        case 'dashboard-schedules':
-                            $adminActionsController->schedulesController();
-                            break;
-                        case 'add-schedule':
-                            $adminActionsController->addScheduleController();
-                            break;
-                        case 'delete-schedule':
-                            $adminActionsController->deleteScheduleController();
-                            break;
-                        case 'add-technique':
-                            $adminActionsController->addTechniqueController();
-                            break;
-                        default:
-                            ViewHandler::redirect('home');
-                            break;
+        if ($_SESSION['budosport']['userLogged'] !== 'admin_connected') {
+            $adminActionsController->connectAdmin();
+        }else{
+            switch ($_GET['real']) {
+                case 'admin':
+                    if (isset($_GET['action'])) {
+                        switch ($_GET['action']) {
+                            case 'dashboard-students':
+                                $adminActionsController->listStudentsController();
+                                break;
+                            case 'student':
+                                $adminActionsController->profilStudentController();
+                                break;
+                            case 'delete':
+                                $adminActionsController->deleteStudentController();
+                                break;
+                            case 'dashboard-schedules':
+                                $adminActionsController->schedulesController();
+                                break;
+                            case 'add-schedule':
+                                $adminActionsController->addScheduleController();
+                                break;
+                            case 'delete-schedule':
+                                $adminActionsController->deleteScheduleController();
+                                break;
+                            case 'dashboard-techniques':
+                                $adminActionsController->listTechniquesController();
+                                break;
+                            case 'add-technique':
+                                $adminActionsController->addTechniqueController();
+                                break;
+                            default:
+                                ViewHandler::redirect('home');
+                                break;
+                        }
                     }
-                }
-                break;
-
-            default:
-                ViewHandler::redirect('home');
-                break;
+                    break;
+    
+                default:
+                    ViewHandler::redirect('home');
+                    break;
+            }
         }
     }else{
         $disciplines = $disciplinesModel->getAllDisciplines();
         ViewHandler::render('home', disciplines:$disciplines);
-
     }
 

@@ -30,5 +30,18 @@ gsap.fromTo('.title-block-2',
   },
 );
 
+// DASHBOARD
+
+const buttons = document.getElementsByClassName("next");
+const container = document.getElementsByClassName("dashb-container")[0];
+
+for(let button of buttons){
+  button.onclick = () => {  
+    container.scrollLeft += (window.innerWidth);
+    console.log();
+    
+  };
+}
+
 
 
