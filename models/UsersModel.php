@@ -7,13 +7,13 @@
         }
 
         public function getAllStudents(){
-            $sql = "SELECT * FROM `students`";
+            $sql = 'SELECT * FROM `students`';
             $stmt = $this->db->query($sql);
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
         public function getStudentByEmailFirstname($email,$firstname){
-            $sql = "SELECT * FROM `students` AS `s` INNER JOIN `grades` AS `g` ON `g`.`grade_id` = `s`.`grade_id` WHERE `s`.`student_email` = ? AND `s`.`student_firstname` = ?;";
+            $sql = 'SELECT * FROM `students` AS `s` INNER JOIN `grades` AS `g` ON `g`.`grade_id` = `s`.`grade_id` WHERE `s`.`student_email` = ? AND `s`.`student_firstname` = ?;';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $email);
             $stmt->bindValue(2, $firstname);
@@ -22,7 +22,7 @@
         }
 
         public function checkUserExistByToken($token){
-            $sql = "SELECT 1 FROM students WHERE student_token = ?;";
+            $sql = 'SELECT 1 FROM students WHERE student_token = ?;';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1,$token);
             $stmt->execute();
@@ -30,7 +30,7 @@
         }
        
         public function getStudentByToken($token){
-            $sql = "SELECT * FROM students WHERE student_token = ?;";
+            $sql = 'SELECT * FROM students WHERE student_token = ?;';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1,$token);
             $stmt->execute();
@@ -38,7 +38,7 @@
         }
 
         public function validStudentTokenMail($token){
-            $sql = "UPDATE students SET student_valid = ? WHERE student_token = ?";
+            $sql = 'UPDATE students SET student_valid = ? WHERE student_token = ?';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, '1');
             $stmt->bindValue(2, $token);
@@ -51,14 +51,14 @@
         }
 
         public function deleteStudentByToken($student_token){
-            $sql = "UPDATE students SET deleted_at = NOW() WHERE student_token = ?";
+            $sql = 'UPDATE students SET deleted_at = NOW() WHERE student_token = ?';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1,$student_token);
             $stmt->execute();
         }
 
         public function getStudentByEmailFirstnameLastname($email,$firstname,$lastname){
-            $sql = "SELECT student_email, student_token, student_id FROM students WHERE student_email = ? AND student_firstname = ? AND student_name = ?";
+            $sql = 'SELECT student_email, student_token, student_id FROM students WHERE student_email = ? AND student_firstname = ? AND student_name = ?';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $email);
             $stmt->bindValue(2, $firstname);
@@ -70,8 +70,8 @@
         public function insertUser($name,$firstname,$birthdate,$subscriptionDate,$email,$password,$lastGradeObtention,$disciplineId,$gradeId,$token){
             $age = $this->getAge($birthdate);
             $rangeAgeId = $this->getAgeRangeId($age);
-            $sql = "INSERT INTO students(student_name,student_firstname,student_birthdate,subscription_date,student_email,student_password,last_grade_obtention,discipline_id,age_id,grade_id,student_token)
-                    SELECT ?,?,?,?,?,?,?,?,?,?,? WHERE NOT EXISTS (SELECT * FROM students WHERE student_name = ? AND student_firstname = ? AND student_email = ?)";
+            $sql = 'INSERT INTO students(student_name,student_firstname,student_birthdate,subscription_date,student_email,student_password,last_grade_obtention,discipline_id,age_id,grade_id,student_token)
+                    SELECT ?,?,?,?,?,?,?,?,?,?,? WHERE NOT EXISTS (SELECT * FROM students WHERE student_name = ? AND student_firstname = ? AND student_email = ?)';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1,$name);
             $stmt->bindValue(2,$firstname);
@@ -92,7 +92,7 @@
         } 
 
         public function checkHash($email,$firstname){
-            $sql = "SELECT `student_password` FROM `students` WHERE student_email = ? AND student_firstname = ?";
+            $sql = 'SELECT `student_password` FROM `students` WHERE student_email = ? AND student_firstname = ?';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $email);
             $stmt->bindValue(2, $firstname);
@@ -112,10 +112,10 @@
             $user_info = $stmt->fetch(PDO::FETCH_OBJ);
             if($user_info){
                 if ($user_info->student_valid === 0) {
-                    throw new Exception("Veuillez activer votre compte, via le lien envoyé sur la boite email, $email");
+                    throw new Exception('Veuillez activer votre compte, via le lien envoyé sur la boite email, $email');
                 }
                 if(!password_verify($password, $passwordHash)){
-                    throw new Exception("Problème lors de la connexion");
+                    throw new Exception('Problème lors de la connexion');
                 }
                 return $user_info;
             }else{
@@ -124,7 +124,7 @@
         }
 
         public function getStudentsByDisciplineAndAgeId($discipline_id, $age_id){
-            $sql = "SELECT * FROM students WHERE discipline_id = ? AND age_id = ? AND student_valid = 1 AND deleted_at IS NULL ;";
+            $sql = 'SELECT * FROM students WHERE discipline_id = ? AND age_id = ? AND student_valid = 1 AND deleted_at IS NULL ;';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $discipline_id);
             $stmt->bindValue(2, $age_id);
@@ -142,7 +142,7 @@
         }
 
         public function getAllAgesRanges(){
-            $sql = "SELECT * FROM `ages_ranges`";
+            $sql = 'SELECT * FROM `ages_ranges`';
             $stmt = $this->db->query($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -155,7 +155,7 @@
         
 
         public function getAgeId($range){
-            $sql = "SELECT age_id FROM ages_ranges WHERE age_tranche = ?";
+            $sql = 'SELECT age_id FROM ages_ranges WHERE age_tranche = ?';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1,$range);
             $stmt->execute();
@@ -165,7 +165,7 @@
 
         public function changePassword($password, $token){
             $password = password_hash($password, PASSWORD_BCRYPT);
-            $sql = "UPDATE students SET student_password = ? WHERE student_token = ?;";
+            $sql = 'UPDATE students SET student_password = ? WHERE student_token = ?;';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1,$password);
             $stmt->bindValue(2, $token);
@@ -178,21 +178,21 @@
         }
 
         public function gradePassStudent($student_id){
-            $sql = "UPDATE students SET grade_id = grade_id + 1 WHERE student_id = ? AND grade_id <= 7";
+            $sql = 'UPDATE students SET grade_id = grade_id + 1 WHERE student_id = ? AND grade_id <= 7';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $student_id);
             $stmt->execute();
         }
 
         public function connectAdmin($pseudo, $password){
-            $sql = "SELECT `admin_password` FROM `admin` WHERE admin_name = ?";
+            $sql = 'SELECT `admin_password` FROM `admin` WHERE admin_name = ?';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1,$pseudo);
             $stmt->execute();
             $admin_info = $stmt->fetch(PDO::FETCH_OBJ);
             if($admin_info){
                 if(!password_verify($password, $admin_info->admin_password)){
-                    throw new Exception("Problème lors de la connexion");
+                    throw new Exception('Problème lors de la connexion');
                 }
                 return $admin_info;
             }else{
@@ -203,7 +203,7 @@
         // KEEP FOR CHANGE INFO
 
         // public function insertAd(){
-        //     $password = password_hash("charlesbaudelaire", PASSWORD_BCRYPT);
+        //     $password = password_hash('charlesbaudelaire', PASSWORD_BCRYPT);
         //     $sql = 'INSERT INTO `admin` (`admin_name`, `admin_password`) VALUES (?,?);';
         //     $stmt = $this->db->prepare($sql);
         //     $stmt->bindValue(1,'admin');

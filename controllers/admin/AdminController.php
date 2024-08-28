@@ -114,6 +114,14 @@
             $this->techniquesController->addTechniqueController();
         }
 
+        public function editTechniqueController(){
+            $this->techniquesController->editTechniqueController();
+        }
+
+        public function deleteTechniqueController(){
+            $this->techniquesController->deleteTechniqueController();
+        }
+
         public function deleteStudentController(){
             try {
                 if (empty($_GET['student_token'])) {

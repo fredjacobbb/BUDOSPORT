@@ -49,7 +49,7 @@
                                     <td><?= $students->student_email ?></td>
                                     <td><?= $grade[$students->grade_id - 1] ?></td>
                                     <td>
-                                        <a class="btn btn-red text-light" href="/?real=admin&action=student&student_token=<?= $students->student_token ?>">profil</a>
+                                        <a class="btn btn-secondary text-light" href="/?real=admin&action=student&student_token=<?= $students->student_token ?>">profil</a>
                                     </td>
                                     <td>
                                         <a class="btn btn-red text-light" href="/?real=admin&action=delete&student_token=<?= $students->student_token ?>">supprimer</a>

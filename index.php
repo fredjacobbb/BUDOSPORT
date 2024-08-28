@@ -71,7 +71,7 @@
                 break;
         }
     }else if(isset($_GET['real'])){
-        if ($_SESSION['budosport']['userLogged'] !== 'admin_connected') {
+        if (!isset($_SESSION) || !isset($_SESSION['budosport'])) {
             $adminActionsController->connectAdmin();
         }else{
             switch ($_GET['real']) {
@@ -101,6 +101,12 @@
                                 break;
                             case 'add-technique':
                                 $adminActionsController->addTechniqueController();
+                                break;
+                            case 'delete-technique':
+                                $adminActionsController->deleteTechniqueController();
+                                break;
+                            case 'edit-technique':
+                                $adminActionsController->editTechniqueController();
                                 break;
                             default:
                                 ViewHandler::redirect('home');

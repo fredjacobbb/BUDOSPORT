@@ -7,7 +7,7 @@
         }
 
         public function getAllTechniquesByDisciplineGradeCategory($discipline_id, $category,$grade_id){
-            $sql = 'SELECT `technique_name`, `technique_description`, `dt`.`technique_id` FROM `disciplines_techniques` AS `dt` INNER JOIN `techniques` ON `dt`.`technique_id` = `techniques`.`technique_id` WHERE `discipline_id` = ? AND `techniques`.`technique_category` = ? AND `techniques`.`grade_id` = ?';
+            $sql = 'SELECT `technique_name`, `technique_description`, `dt`.`technique_id` FROM `disciplines_techniques` AS `dt` INNER JOIN `techniques` ON `dt`.`technique_id` = `techniques`.`technique_id` WHERE `discipline_id` = ? AND `techniques`.`technique_category` = ? AND `techniques`.`grade_id` = ? AND `techniques`.`deleted_at` IS NULL';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $discipline_id);
             $stmt->bindValue(2, $category);
@@ -20,7 +20,7 @@
             $sql = 'SELECT `techniques`.`technique_name`, `techniques`.`technique_category`, `techniques`.`technique_id` 
             FROM `disciplines_techniques` AS `dt` 
             INNER JOIN `techniques` ON `dt`.`technique_id` = `techniques`.`technique_id` 
-            WHERE `dt`.`discipline_id` = ? AND `techniques`.`grade_id` = ?';
+            WHERE `dt`.`discipline_id` = ? AND `techniques`.`grade_id` = ? AND `techniques`.`deleted_at` IS NULL';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $discipline_id);
             $stmt->bindValue(2, $grade_id);
@@ -29,7 +29,7 @@
         }
 
         public function getAllCategoriesByDiscipline($discipline_id, $grade_id){
-            $sql = 'SELECT DISTINCT `technique_category` FROM `techniques` AS `t` INNER JOIN disciplines_techniques AS `dt` ON `t` . `technique_id` = `dt`. `technique_id` WHERE `dt`.`discipline_id` = ? AND `t`.`grade_id` = ?';
+            $sql = 'SELECT DISTINCT `technique_category` FROM `techniques` AS `t` INNER JOIN `disciplines_techniques` AS `dt` ON `t` . `technique_id` = `dt`. `technique_id` WHERE `dt`.`discipline_id` = ? AND `t`.`grade_id` = ?';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $discipline_id);
             $stmt->bindValue(2, $grade_id);
@@ -69,16 +69,37 @@
         }
 
         public function editTechnique($technique_id, $technique_category, $technique_name, $technique_description, $grade_id){
-            $sql = 'UPDATE `techniques` SET (`technique_category`, `technique_name`, `technique_description`, `grade_id`) VALUES (?,?,?,?,?) WHERE `technique_id` = ?';
+            $sql = 'UPDATE `techniques` SET `technique_category` = ?, `technique_name` = ?, `technique_description` = ?, `grade_id` = ? WHERE `technique_id` = ?';            
             $stmt = $this->db->prepare($sql);
-            $stmt->bindValue(1,$technique_id);
-            $stmt->bindValue(2,$technique_category);
-            $stmt->bindValue(3,$technique_name);
-            $stmt->bindValue(4,$technique_description);
-            $stmt->bindValue(5,$grade_id);
+            $stmt->bindValue(1,$technique_category);
+            $stmt->bindValue(2,$technique_name);
+            $stmt->bindValue(3,$technique_description);
+            $stmt->bindValue(4,$grade_id);
+            $stmt->bindValue(5,$technique_id);
             $stmt->execute();
         }
 
+        public function getTechnique($technique_id){
+            $sql = 'SELECT * FROM techniques WHERE technique_id = ?';
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, $technique_id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }
+
+        public function deleteTechnique($technique_id){
+            $sql = 'UPDATE techniques SET deleted_at = NOW() WHERE technique_id = ?';
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, $technique_id);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        
         public function validStudentTechniques($student_id, $technique_id){
             $sql = 'INSERT INTO `techniques_students` (`student_id`,`technique_id`) VALUES (?,?)';
             $stmt = $this->db->prepare($sql);
@@ -88,7 +109,7 @@
         }
 
         public function getAllTechniquesLearnedByStudentId($student_id,$technique_name){
-            $sql = 'SELECT achievement FROM techniques_students INNER JOIN techniques ON techniques_students . technique_id = techniques . technique_id WHERE techniques_students . student_id = ? AND techniques . technique_name = ?';
+            $sql = 'SELECT achievement FROM techniques_students INNER JOIN techniques ON techniques_students . technique_id = techniques . technique_id WHERE techniques_students . student_id = ? AND techniques . technique_name = ? AND deleted_at IS NULL';
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $student_id);
             $stmt->bindValue(2, $technique_name);

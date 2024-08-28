@@ -31,6 +31,7 @@
             <div class="minw-100 bg-light p-0 m-0 dashb-slide-sched" class="dashb" id="dashb">
                 <h2 class="text-light fs-1 bg-red ps-4 py-3"><?= $schedule->age_tranche ?> ans</h2>
                 <div class="text-end">
+                    <button class="btn btn-dark prev mx-3">PREV</button>
                     <button class="btn btn-dark next mx-3">NEXT</button>
                 </div>
                 <form  method="POST" action="./?real=admin&action=add-schedule" class="d-flex flex-wrap flex-md-nowrap justify-content-center">

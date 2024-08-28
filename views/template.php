@@ -74,5 +74,6 @@
     <script type="module" src="public/assets/js/dashbHide.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="public/assets/js/map.js"></script>
+    <script src="public/assets/js/techniques.js"></script>
 </body>
 </html>
