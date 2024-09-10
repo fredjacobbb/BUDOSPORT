@@ -2,11 +2,6 @@
 
 <?php ob_start() ?>
 
-<?php 
-    "6LcZdT0qAAAAAEZwNPrfy_3pgkWYFHbaX0J80uTF public";
-    "6LcZdT0qAAAAAPRUmCXVjBhtr2FjSslAyL1Fvj6p secret";
-?>
-
 <?php if(isset($_SESSION['budosport']['registration_success'])): ?>
     <div class="alert alert-success text-center text-light flash flash-success" role="alert">
         <p class="m-0"><?= Flash::display("registration_success"); ?></p>

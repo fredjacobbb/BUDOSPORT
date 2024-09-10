@@ -5,7 +5,7 @@ use GuzzleHttp\Client;
 class Recaptcha {
 
     public static function checkCaptcha() {
-        $secretKey = '6LcZdT0qAAAAAPRUmCXVjBhtr2FjSslAyL1Fvj6p';
+        $secretKey = '';
         $client = new Client();
         if (!empty($_POST['g-recaptcha-response'])) {
             $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
