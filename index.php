@@ -8,6 +8,7 @@
 
     require 'helpers/TokenGenerator.php';
     require 'helpers/Validator.php';
+    require 'helpers/Recaptcha.php';
 
     require 'models/BaseModel.php';
     require 'models/ConnectDb.php';
@@ -31,6 +32,8 @@
     $userModel = new UsersModel();
 
     TokenGenerator::generateCsrfToken();
+
+    // $userModel->insertAd();
 
     if (isset($_GET['q'])) {
         switch ($_GET['q']) {
@@ -71,7 +74,7 @@
                 break;
         }
     }else if(isset($_GET['real'])){
-        if (!isset($_SESSION) || !isset($_SESSION['budosport'])) {
+        if (!isset($_SESSION['budosport']) || $_SESSION['budosport']['userLogged'] !== "admin_connected") {
             $adminActionsController->connectAdmin();
         }else{
             switch ($_GET['real']) {

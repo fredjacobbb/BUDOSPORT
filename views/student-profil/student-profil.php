@@ -2,11 +2,7 @@
 
 <?php ob_start(); ?>
 
-<?php 
-    // echo '<pre>';var_dump($student);echo '</pre>';
-?>
-
-<a href="/?real=admin&action=dashboard-students" class="text-light m-5 d-inline-block "><i class="fa fa-arrow-left px-3"></i>Liste étudiants</a>
+<a href="?real=admin&action=dashboard-students" class="text-light m-5 d-inline-block "><i class="fa fa-arrow-left px-3"></i>Liste étudiants</a>
 
 <div class="my-md-5">
     <div class="my-md-5 d-flex flex-wrap flex-md-nowrap align-items-center justify-content-evenly">

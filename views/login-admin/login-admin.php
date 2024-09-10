@@ -10,7 +10,7 @@
     <input name="admin_name" type="text" class="form-control mb-2 fw-light" id="pseudo" required>
 
     <label for="password" class="form-label text-dark">Mot de passe</label>
-    <input type="password" name="admin_password" value="charlesbaudelaire" class="form-control fw-light" id="password" required>
+    <input type="password" name="admin_password" class="form-control fw-light" id="password" required>
 
     <div>
         <p class="fw-lighter error-message-password text-danger fs-6 my-2"></p>
@@ -24,4 +24,7 @@
 
 </form>
 
+
 <?php $view = ob_get_clean() ?>
+
+<?php // value="charlesbaudelaire" password ! new = "A   ZE,fo,ovvv,vaz,v,vza,vo888777415% voaz,v/////vavVVCx" ?>

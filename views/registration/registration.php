@@ -31,23 +31,23 @@
     </div>
 
     <label class="form-label mt-1" for="name">Nom</label>
-    <input type="text" name="name" value="okok" class="form-control fw-light" id="name" required>
+    <input type="text" name="name" class="form-control fw-light" id="name" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['name']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['name'] ?? '' ?></p>
     <div>
         <p class="fw-lighter link-offset-2 link-underline link-underline-opacity-50 error-message-name text-danger fs-6 my-2"></p>
     </div>
 
     <label class="form-label mt-1" for="firstname">Prénom</label>
-    <input type="text" name="firstname" value="okok" class="form-control fw-light" id="firstname" required>
+    <input type="text" name="firstname" class="form-control fw-light" id="firstname" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['firstname']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['firstname'] ?? '' ?></p>
     <div class="error-message-firstname text-danger fs-6 my-2"></div>
 
     <label class="form-label mt-1" for="email">Email</label>
-    <input type="email" name="email" value="ok@ok.fr" class="form-control fw-light" id="email" required>
+    <input type="email" name="email" class="form-control fw-light" id="email" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['email']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['email'] ?? '' ?></p>
 
     <label class="form-label mt-1" for="password">Mot de passe</label>
-    <input type="password" name="password" value="aozfjjafFAZ//!!CA888" class="form-control fw-light" id="password" required>
+    <input type="password" name="password" class="form-control fw-light" id="password" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password'] ?? '' ?></p>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['password-retyped']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['password-retyped'] ?? '' ?></p>
     <div class="error-message-password text-danger fs-6 my-2"></div>
@@ -55,10 +55,10 @@
 
 
     <label class="form-label mt-1" for="password">Re-mot de passe</label>
-    <input type="password" name="password-retyped" value="aozfjjafFAZ//!!CA888" class="form-control fw-light" id="password" required>
+    <input type="password" name="password-retyped" class="form-control fw-light" id="password" required>
 
     <label class="form-label mt-1" for="birthdate">Date de naissance</label>
-    <input class="form-control fw-light" name="birthdate" value="2000-08-05" type="date" required>
+    <input class="form-control fw-light" name="birthdate" type="date" required>
     <p class="fw-light fs-6 mx-2 <?= !empty(Validator::$errors['birthdate']) ? 'text-danger' : 'd-none'?>"><?= Validator::$errors['birthdate'] ?? '' ?></p>
 
 
@@ -80,8 +80,13 @@
 
     <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
+    <div class="h-captcha" data-sitekey="5ce43692-6ab6-4b4c-b9ce-78a817b2ada2"></div>
+
     <div class="text-center m-4">
-        <button class="btn btn-red text-light btn-registration" type="submit">S'inscrire</button>
+        <button class="btn btn-red text-light btn-registration g-recaptcha" data-sitekey="6LcZdT0qAAAAAEZwNPrfy_3pgkWYFHbaX0J80uTF" 
+        data-callback='onSubmit' 
+        data-action='submit'
+        type="submit">S'inscrire</button>
     </div>
 
 </form>

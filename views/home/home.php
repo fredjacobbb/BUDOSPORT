@@ -33,13 +33,13 @@
 </div>
 
 <div class="section-presentation d-flex flex-wrap align-items-center align-content-center">
-    <div class="container-one title-block d-flex align-items-center col-12 col-md-6">
+    <div class="container-one title-block mt-5 d-flex align-items-center col-12 col-md-6">
         <h2 class="text-light title-section ps-3 w-100 py-5">UN MAÎTRE</h2>
     </div>
     <div class="container-two d-flex align-items-center justify-content-center mx-auto col-12 col-md-4">
         <div class="text-center p-5 shadow shadow rounded">
             <div class="container-sensei">
-                <img src="public/assets/img/pp-fred.png" alt="">
+                <img src="public/assets/img/pp-fred.webp" alt="">
             </div>
             <h2 class="text-light fs-3">Frédéric Bourgouin</h2>
             <p class="text-light p-2 mx-auto">7ème DAN, à commencé le judo, le ju-jitsu à l'âge de 5 ans et s'adonne depuis plus de 30 ans à partager sa passion pour le Ju-jitsu, le Judo et le Ne-waza.</p>
@@ -53,7 +53,7 @@
             <iframe width="100%" height="300px" frameborder="0" allowfullscreen allow="geolocation" src="//umap.openstreetmap.fr/fr/map/carte-sans-nom_1106076?scaleControl=false&miniMap=false&scrollWheelZoom=true&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=null&onLoadPanel=none&captionBar=false&captionMenus=true&captionControl=null"></iframe></p>
         </div>
     </div>
-    <div class="container-two col-12 col-md-5">
+    <div class="container-two col-12 col-md-5 my-5">
         <div class="title-block-2">
             <h2 class="text-light title-section-2 bg-red ps-5 py-5 text-center">UN LIEU</h2>
         </div>

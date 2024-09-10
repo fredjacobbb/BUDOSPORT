@@ -16,6 +16,12 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(token){
+            document.getElementsByClassName('form-login')[0].submit();
+        }
+    </script>
 </head>
 <body class="bg-dark text-light">
 
@@ -28,14 +34,14 @@
             <li class="fs-6"><a class="active" href="/"><i class="fas fa-home me-3"></i>Accueil</a></li>
             <li class="fs-6"><a href="/?q=schedules"><i class="fas fa-clock me-3"></i>Nos horaires</a></li>
             <li class="fs-6"><a href="./?q=disciplines"><i class="fas fa-user-ninja me-3"></i>Nos disciplines</a></li>
-            <li class="fs-6 <?= !empty($_SESSION['budosport']['userLogged']) ? 'd-none' : '' ?>"><a href="./?q=login"><i class="fas fa-sign-in-alt me-3"></i>Se connecter</a></li>
-            <li class="fs-6 <?= !empty($_SESSION['budosport']['userLogged']) ? 'd-none' : '' ?>"><a href="./?q=registration"><i class="fas fa-user-plus me-3"></i>S'inscrire</a></li>
-            <li class="fs-6 <?= !empty($_SESSION['budosport']['userLogged']) ? '' : 'd-none' ?> <?= !empty($_SESSION['budosport']['userLogged']) && $_SESSION['budosport']['userLogged'] == 'admin_connected' ? 'd-none' : '' ?>"><a href="./?q=mon-espace"><i class="fas fa-user-plus me-3"></i>Mon espace</a></li>
+            <li class="fs-6 <?= !empty($_SESSION['budosport']['userLogged']) ? 'd-none' : '' ?>"><a href="?q=login"><i class="fas fa-sign-in-alt me-3"></i>Se connecter</a></li>
+            <li class="fs-6 <?= !empty($_SESSION['budosport']['userLogged']) ? 'd-none' : '' ?>"><a href="?q=registration"><i class="fas fa-user-plus me-3"></i>S'inscrire</a></li>
+            <li class="fs-6 <?= !empty($_SESSION['budosport']['userLogged']) ? '' : 'd-none' ?> <?= !empty($_SESSION['budosport']['userLogged']) && $_SESSION['budosport']['userLogged'] == 'admin_connected' ? 'd-none' : '' ?>"><a href="?q=mon-espace"><i class="fas fa-user-plus me-3"></i>Mon espace</a></li>
             <li class="fs-6 <?= !empty($_SESSION['budosport']['userLogged']) ? '' : 'd-none'?>"><a href="./?q=disconnect"><i class="fas fa-sign-in-alt me-3"></i>Se déconnecter</a></li>
             <li class="fs-6"><a href="./?q=contact-us"><i class="fas fa-envelope me-3"></i>Nous contacter</a></li>
         </ul>
     </nav>
-
+    
     <?= $view ?>
 
     <footer class="container-fluid bg-red text-light pt-5 pb-2 mt-5">
@@ -70,7 +76,6 @@
     <script type="module" src="public/assets/js/scrollEffect.js"></script>
     <script type="module" src="public/assets/js/TextAnimations.js"></script>
     <script type="module" src="public/assets/js/loadingbarEffects.js"></script>
-    <script type="module" src="public/assets/js/formEffect.js"></script>
     <script type="module" src="public/assets/js/dashbHide.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="public/assets/js/map.js"></script>

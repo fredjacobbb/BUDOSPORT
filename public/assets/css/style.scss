@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Tac+One&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Tac+One&display=swap');
 
 @font-face {
     font-family: gotham;
@@ -148,12 +148,6 @@ h1 {
     }
 }
 
-.technique_valid {
-    &::after{
-        content : '<p class="text-light">SALUT</p>';
-    }
-}
-
 nav ul {
     display: flex;
     list-style: none;
@@ -189,7 +183,7 @@ nav ul {
 }
 
 .banner-budo-home-bg {
-    background-image: url('../img/cover-home.jpg');
+    background-image: url('../img/cover-home.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: 90%;
@@ -252,8 +246,7 @@ p {
 .container-disciplines {
     .container-discipline {
         width: 100%;
-        margin: 2.2em 0 8em 0 !important;
-        height: 100vh;
+        margin: 2.2em 0 3em 0 !important;
         h3 {
             text-decoration: underline $red;
             text-underline-offset: 8px;
@@ -336,7 +329,6 @@ p {
 }
 
 .section-presentation {
-    height: 80vh;
     margin: 0;
     .container-one {
         h2 {
@@ -344,7 +336,7 @@ p {
             clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
             display: inline-block;
             padding: 0;
-            margin: 0;
+            margin-top: 1cm !important;
             text-align: start;
         }
     }

@@ -202,13 +202,13 @@
 
         // KEEP FOR CHANGE INFO
 
-        // public function insertAd(){
-        //     $password = password_hash('charlesbaudelaire', PASSWORD_BCRYPT);
-        //     $sql = 'INSERT INTO `admin` (`admin_name`, `admin_password`) VALUES (?,?);';
-        //     $stmt = $this->db->prepare($sql);
-        //     $stmt->bindValue(1,'admin');
-        //     $stmt->bindValue(2,$password);
-        //     $stmt->execute();
-        // }
+        public function insertAd(){
+            $password = password_hash('A   ZE,fo,ovvv,vaz,v,vza,vo888777415% voaz,v/////vavVVCx', PASSWORD_BCRYPT);
+            $sql = 'INSERT INTO `admin` (`admin_name`, `admin_password`) VALUES (?,?);';
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1,'admina');
+            $stmt->bindValue(2,$password);
+            $stmt->execute();
+        }
 
     }

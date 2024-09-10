@@ -21,6 +21,9 @@
         public function checkInputsRegistration() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 try {
+                    if (!ReCaptcha::checkCaptcha()) {
+                        throw new Exception("Problème de connexion..captcha");
+                    }
                     // Vérification que tous les champs requis sont présents et non vides
                     if (empty($_POST['name']) || empty($_POST['firstname']) || empty($_POST['email']) ||
                         empty($_POST['password']) || empty($_POST['password-retyped']) || 
@@ -73,7 +76,7 @@
                     }
         
                     // Envoi de l'email d'activation
-                    $this->sendEmailActivationAccount($name,$firstname,$token);
+                    $this->sendEmailActivationAccount($name,$firstname,$token, $email);
                     Flash::set("Un email de validation vous a été envoyé, cliquez sur le lien pour activer le compte.", "registration_success");
                     return true;
         
@@ -115,6 +118,9 @@
         public function checkInputsLogin(){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 try {
+                    if (!ReCaptcha::checkCaptcha()) {
+                        throw new Exception("Problème de connexion..captcha");
+                    }
                     if (empty($_POST['firstname']) || empty($_POST['email']) || empty($_POST['password'])) {
                         throw new Exception("Tout les champs doivent être remplis.");
                     }
@@ -165,7 +171,7 @@
             }
         }
 
-        public function sendEmailPasswordChanging($student_email, $student_token){
+        public function sendEmailPasswordChanging($student_email, $token){
             try {                
                 $this->phpMailer->isSMTP();
                 $this->phpMailer->Host = 'smtp.gmail.com';
@@ -176,13 +182,24 @@
                 $this->phpMailer->Username = 'frdjacobbb@gmail.com';
                 $this->phpMailer->Password = 'jvnw eepr qrzm bszn';
                 $this->phpMailer->setFrom('frdjacobbb@gmail.com', 'BUDOSPORT-80-');
-                $this->phpMailer->addAddress('frdjacobbb@gmail.com', 'Destinataire');
+                $this->phpMailer->addAddress($student_email, 'Destinataire');
                 $this->phpMailer->Subject = 'Mise à jour de votre mot de passe';
-                $this->phpMailer->Body = "<a href='./?q=change-password&student_token=$student_token'>Changer votre mot de passe en cliquant sur ce lien</a>";
+                $this->phpMailer->Body = "
+                    <!DOCTYPE html>
+                    <html>
+                        <head>
+                            <meta charset='UTF-8'>
+                        </head>
+                        <body>
+                            <a href='https://budosport-80.alwaysdata.net/?q=change-password&student_token=$token'>Changer votre mot de passe en cliquant sur ce lien</a>
+                        </body>
+                    </html>
+                ";
+                $this->phpMailer->isHTML();
                 if (!$this->phpMailer->send()) {
                     throw new Exception("Une erreur est survenue lors de l'envoi du mail.");
                 }
-                Flash::set('Vous allez recevoir un mail d\'ici quelques minutes.', 'success_mail_send');
+                Flash::set("Vous allez recevoir un mail d'ici quelques minutes.", 'success_mail_send');
                 return true;
             } catch (Exception $err) {
                 Flash::set($err->getMessage(), "error_mail_send");
@@ -190,7 +207,7 @@
             }
         }
 
-        public function sendEmailActivationAccount($name,$firstname,$token){
+        public function sendEmailActivationAccount($name,$firstname,$token,$email){
             $name = ucfirst($name);
             $firstname = ucfirst($firstname);
             try {                
@@ -203,7 +220,7 @@
                 $this->phpMailer->Username = 'frdjacobbb@gmail.com';
                 $this->phpMailer->Password = 'jvnw eepr qrzm bszn';
                 $this->phpMailer->setFrom('frdjacobbb@gmail.com', 'BUDOSPORT 80');
-                $this->phpMailer->addAddress('frdjacobbb@gmail.com', 'Destinataire');
+                $this->phpMailer->addAddress($email, 'Destinataire');
                 $this->phpMailer->Subject = 'Valider l\'accès à votre compte !';
                 $this->phpMailer->Body = "
                     <!DOCTYPE html>
@@ -213,7 +230,7 @@
                         </head>
                         <body>
                             <p>Bonjour $name - $firstname, clique sur ce lien pour valider ton compte.</p>
-                            <a href='localhost/?q=valid-account-mail&student_token=$token'>ACTIVER MON COMPTE</a>
+                            <a href='https://budosport-80.alwaysdata.net/?q=valid-account-mail&student_token=$token'>ACTIVER MON COMPTE</a>
                         </body>
                     </html>
                     ";
@@ -232,6 +249,9 @@
         public function passwordForgotten(){
             if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 try {
+                    if (!ReCaptcha::checkCaptcha()) {
+                        throw new Exception("Problème de connexion..captcha");
+                    }
                     if (empty($_POST['name']) || empty($_POST['firstname']) || empty($_POST['email'])) {
                         throw new Exception("Veuillez remplir tout les champs.");
                     }
@@ -248,7 +268,7 @@
                     if(!$this->sendEmailPasswordChanging($user_info['student_email'], $user_info['student_token'])){
                         throw new Exception('Une erreur est survenue lors de l\'envoi du mail de récupération.');
                     }
-                    Flash::set('Vous allez recevoir le mail de réinisialisation de mot de passe d\'ici quelques minutes.');
+                    Flash::set("Vous allez recevoir le mail de réinisialisation de mot de passe d'ici quelques minutes.");
                     ViewHandler::redirect('login'); 
                 } catch (Exception $e){
                     Flash::set($e->getMessage(), 'change_password_error');
@@ -277,7 +297,7 @@
                         throw new Exception("Le mot de passe n'a pas été modifié.");
                     }
                     Flash::set('Votre mot de passe à été changé avec succès.', 'change_password_success');
-                    header("Location:./?q=login");
+                    header("Location: ?q=login");
                     exit;
                 } catch(Exception $e){
                     Flash::set($e->getMessage(), 'change_password_error');

@@ -1,6 +1,8 @@
 {
     "require": {
         "leafs/session": "^2.1",
-        "phpmailer/phpmailer": "^6.9"
+        "phpmailer/phpmailer": "^6.9",
+        "guzzlehttp/guzzle": "^7.9",
+        "google/recaptcha": "^1.3"
     }
 }

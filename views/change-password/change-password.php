@@ -31,8 +31,13 @@
 
     <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
+    <div class="h-captcha" data-sitekey="5ce43692-6ab6-4b4c-b9ce-78a817b2ada2"></div>
+
     <div class="text-center m-4">
-        <button class="btn btn-registration btn-red text-light" type="submit">Valider</button>
+        <button class="btn btn-red text-light btn-registration g-recaptcha" data-sitekey="6LcZdT0qAAAAAEZwNPrfy_3pgkWYFHbaX0J80uTF" 
+        data-callback='onSubmit' 
+        data-action='submit'
+        type="submit">Valider</button>
     </div>
 
 </form>
